@@ -1,0 +1,209 @@
+// :::::::::::::::::::::::::::::::::::::::::::::::		TEST		 :::::::::::::::::::::::::::::::::::::::::::::::
+
+###
+
+GET http://localhost:8080/proyecto2/api/hola HTTP/1.1
+content-type: application/json
+
+// :::::::::::::::::::::::::::::::::::::::::::::::		LOGIN ADMIN		 :::::::::::::::::::::::::::::::::::::::::::::::
+
+###
+
+POST http://localhost:8080/proyecto2/api/loginadmin HTTP/1.1
+content-type: application/json
+
+
+{
+	"user":"admin",
+	"password":"201318652"
+}
+
+// :::::::::::::::::::::::::::::::::::::::::::::::		LOGIN		 :::::::::::::::::::::::::::::::::::::::::::::::
+
+###
+
+POST http://localhost:8080/proyecto2/api/login HTTP/1.1
+content-type: application/json
+
+
+{
+	"user":"admin",
+	"password":"201318652"
+}
+
+// :::::::::::::::::::::::::::::::::::::::::::::::		USUARIOS		 :::::::::::::::::::::::::::::::::::::::::::::::
+
+###
+POST http://localhost:8080/proyecto2/api/newuser HTTP/1.1
+content-type: application/json
+
+{
+	"codigo":"11we",
+	"nombre":"awqwsd",
+	"contrasena":"eas"
+}
+
+
+###
+POST http://localhost:8080/proyecto2/api/cargarcatedraticos HTTP/1.1
+content-type: application/json
+
+{
+	"catedraticos":
+				[
+					{
+					"codigo":"AX23",
+					"nombre":"Ing. asd"
+					},
+					{
+					"codigo":"AX33",
+					"nombre":"Ing. a3eed"
+					}
+				]
+}
+
+###
+
+POST http://localhost:9098/proyecto2/api/editcatedratico HTTP/1.1
+content-type: application/json
+
+
+{
+	"codigo":"AX993",
+	"catedratico":
+				{
+				"codigo":"AX993",
+				"nombre":"Ing. nueva putita"
+                }
+}
+
+###
+
+POST http://localhost:8080/proyecto2/api/deletecatedratico HTTP/1.1
+content-type: application/json
+
+{"codigo": "AX9990"}
+
+###
+
+GET http://localhost:8080/proyecto2/api/getarbolcatedraticos HTTP/1.1
+content-type: application/json
+
+###
+
+GET http://localhost:8080/proyecto2/api/getgraficausarios HTTP/1.1
+content-type: application/json
+
+
+// :::::::::::::::::::::::::::::::::::::::::::::::		CURSOS		 :::::::::::::::::::::::::::::::::::::::::::::::
+
+###
+
+POST http://localhost:8080/proyecto2/api/newcurso HTTP/1.1
+content-type: application/json
+
+{
+	"curso":
+			{
+			"codigo":"oo88",
+			"nombre":"Arqui",
+			"codigoCatedratico":"Auu3"
+			}
+}
+
+###
+
+POST http://localhost:8080/proyecto2/api/cargarcursos HTTP/1.1
+content-type: application/json
+
+{
+	"cursos":
+			[
+				{
+				"codigo":"oo99",
+				"nombre":"Arqui",
+				"codigoCatedratico":"Auu3"
+				},
+				{
+				"codigo":"oo88",
+				"nombre":"Conta",
+				"codigoCatedratico":"aaaa"
+				}
+			]
+}
+
+
+###
+
+POST http://localhost:9098/proyecto2/api/editcurso HTTP/1.1
+content-type: application/json
+
+
+{
+	"codigo":"pp099",
+	"curso":
+			{
+			"codigo":"pp100",
+			"nombre":"EDD",
+			"nombreCatedratico":"Inga. Niurka"
+			}
+}
+
+###
+
+POST http://localhost:9098/proyecto2/api/deletecurso HTTP/1.1
+content-type: application/json
+
+{"codigo": "uu88"}
+
+###
+
+GET http://localhost:8080/proyecto2/api/getlistacursos HTTP/1.1
+content-type: application/json
+
+###
+
+GET http://localhost:8080/proyecto2/api/getgraficalista HTTP/1.1
+content-type: application/json
+
+// :::::::::::::::::::::::::::::::::::::::::::::::		SALONES		 :::::::::::::::::::::::::::::::::::::::::::::::
+
+###
+
+POST http://localhost:8080/proyecto2/api/newsalon HTTP/1.1
+content-type: application/json
+
+{
+	"salon":
+			{
+			"csalon":"102",
+			"fedificio":"T-1",
+			"capacidad":"150"
+			}
+}
+
+###
+
+POST http://localhost:8080/proyecto2/api/cargarsalones HTTP/1.1
+content-type: application/json
+
+{
+	"salones":
+			[
+				{
+				"csalon":"412",
+				"fedificio":"T-3",
+				"capacidad":"85"
+				},
+				{
+				"csalon":"212",
+				"fedificio":"T-2",
+				"capacidad":"34"
+				}
+			]
+}
+
+###
+
+GET http://localhost:8080/proyecto2/api/getgraficamatriz HTTP/1.1
+content-type: application/json
