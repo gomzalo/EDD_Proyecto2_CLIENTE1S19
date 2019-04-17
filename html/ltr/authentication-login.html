@@ -69,7 +69,7 @@
                                 <div class="form-group">
                                     <div class="p-t-20">
                                         <button class="btn btn-info" id="to-recover" type="button"><i class="fa fa-lock m-r-5"></i>¿Olvidaste tu constraseña?</button>
-                                        <button class="btn btn-success float-right" id="login" type="submit">Login</button>
+                                        <button class="btn btn-success float-right" id="login" type="submit">Entrar</button>
                                     </div>
                                 </div>
                             </div>
@@ -158,15 +158,12 @@
     });
     $("#login").click(function(){
         toastr.info("Ingresando","Bienvenido");
-        httpPost(login_usuario, getValueForm("loginform"), function(response){
+        httpPost(login_admin, getValueForm("loginform"), function(response){
             var result = JSON.parse(response);
             console.log(result.result);
             if(result.result == '1'){
-                window.location.href = "http://127.0.0.1:8081/html/ltr/index2.html";
-                toastr.succes("Credenciales correctas", "¡Bienvenido gestor!");
-            }else if(result.result == '2'){
                 window.location.href = "http://127.0.0.1:8081/html/ltr/index.html";
-                toastr.succes("Credenciales correctas", "¡Bienvenido admin!");
+                toastr.succes("Credenciales correctas", "¡Bienvenido administrador!");
             }else{
                 toastr.error("Credenciales incorrectas", "Error al inicio de sesión");
             }
