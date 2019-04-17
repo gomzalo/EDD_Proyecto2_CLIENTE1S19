@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
-    <title>Gestion de vuelos</title>
+    <title>Gestor de vuelos</title>
     <!-- Custom CSS -->
     <link href="../../assets/libs/flot/css/float-chart.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -233,7 +233,6 @@
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.html" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="proyecto2/reportes.html" aria-expanded="false"><i class="mdi mdi-chart-scatterplot-hexbin"></i><span class="hide-menu">Reportes</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="proyecto2/carga.html" aria-expanded="false"><i class="mdi mdi-network-upload"></i><span class="hide-menu">Cargar</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="proyecto2/calendario.html" aria-expanded="false"><i class="mdi mdi-calendar-check"></i><span class="hide-menu">Calendario</span></a></li>
                         <!-- <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Forms </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
                                 <li class="sidebar-item"><a href="form-basic.html" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> Form Basic </span></a></li>
@@ -288,12 +287,16 @@
              <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">Dashboard administrador</h4>
+                        <h5>Dashboard</h5>
+                        </br></br>
+                        <p style="padding-right: 5px;">
+                        <h3 class="page-title">   Gestor de vuelos</h3>
+                        </p>
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Library</li>
+                                    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Gestor</li>
                                 </ol>
                             </nav>
                         </div>
@@ -332,7 +335,7 @@
                     <!-- Column -->
                     <div class="col-md-6 col-lg-4 col-xlg-3">
                         <div class="card card-hover">
-                            <div class="box bg-cyan text-center">
+                            <div class="box bg-cyan text-center" id="edificios">
                                 <h1 class="font-light text-white"><i class="mdi mdi-city"></i></h1>
                                 <h6 class="text-white">Edificios</h6>
                             </div>
@@ -348,14 +351,14 @@
                         </div>
                     </div>
                     <!-- Column -->
-                    <div class="col-md-6 col-lg-8 col-xlg-3">
+                    <!-- <div class="col-md-6 col-lg-8 col-xlg-3">
                         <div class="card card-hover">
                             <div class="box bg-success text-center" id="calendario">
                                 <h1 class="font-light text-white"><i class="mdi mdi-calendar-clock"></i></h1>
                                 <h6 class="text-white">Calendario</h6>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- Column -->
                     <div class="col-md-6 col-lg-8 col-xlg-3">
                         <div class="card card-hover">
@@ -433,21 +436,31 @@
     <!-- This page plugin js -->
     <!-- ============================================================== -->
     <script>
-        $("#carga").click(function(){        
-            window.location.href = "http://127.0.0.1:8081/html/ltr/proyecto2/carga.html";
-            toastr.info("Carga","Redirigiendo");
-            // Code here ma' nigga;
-        });
         $("#catedraticos").click(function(){        
             window.location.href = "http://127.0.0.1:8081/html/ltr/proyecto2/catedraticos.html";
             toastr.info("Catedraticos","Redirigiendo");
             // Code here ma' nigga;
         });
-        $("#catedraticos").click(function(){        
+        $("#cursos").click(function(){        
             window.location.href = "http://127.0.0.1:8081/html/ltr/proyecto2/cursos.html";
             toastr.info("Cursos","Redirigiendo");
             // Code here ma' nigga;
         });
+        $("#edificios").click(function(){        
+            window.location.href = "http://127.0.0.1:8081/html/ltr/proyecto2/edificios.html";
+            toastr.info("Edificios","Redirigiendo");
+            // Code here ma' nigga;
+        });
+        $("#carga").click(function(){        
+            window.location.href = "http://127.0.0.1:8081/html/ltr/proyecto2/carga.html";
+            toastr.info("Carga","Redirigiendo");
+            // Code here ma' nigga;
+        });
+        // $("#calendario").click(function(){        
+        //     window.location.href = "http://127.0.0.1:8081/html/ltr/proyecto2/calendario.html";
+        //     toastr.info("Calendario","Redirigiendo");
+        //     // Code here ma' nigga;
+        // });
         $("#reportes").click(function(){        
             window.location.href = "http://127.0.0.1:8081/html/ltr/proyecto2/reportes.html";
             toastr.info("Reportes","Redirigiendo");

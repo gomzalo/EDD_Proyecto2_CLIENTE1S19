@@ -34,62 +34,91 @@
             httpGet(get_cursos, function(response){                
                 var respuesta = JSON.parse(response);                    
                 var tabla = document.getElementById('lista');
-                for(var i = 0; i < respuesta.result.length; i++){
-                    console.log(respuesta.result[i]);
-                    var actual = respuesta.result[i];
-                    var fila = document.createElement('tr');
-                    /* Crear elementos */
-                    var numero = document.createElement('td');
-                    numero.innerHTML = i + 1;
-                    var codigo = document.createElement('td');
-                    codigo.innerHTML = actual.codigo;
-                    var nombre = document.createElement('td');
-                    nombre.innerHTML = actual.nombre;
-                    var acciones = document.createElement('td');
-                    acciones.innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;';                        
-                    var mod_modificar = document.createElement('a');                        
-                    mod_modificar.setAttribute('onclick', 'mostrarFila(this);');                        
-                    mod_modificar.setAttribute('data-toggle','tooltip');
-                    mod_modificar.setAttribute('data-placement', 'top');
-                    mod_modificar.setAttribute('title', 'Modificar');                        
-                    var i_etq1 = document.createElement('i');
-                    i_etq1.classList.add('mdi', 'mdi-check');
-                    var mod_eliminar = document.createElement('a');
-                    mod_eliminar.setAttribute('href', 'javascript:mostrarModalModificar(this)');
-                    mod_eliminar.setAttribute('data-toggle','tooltip');
-                    mod_eliminar.setAttribute('data-placement', 'top');
-                    mod_eliminar.setAttribute('title', 'Borrar');
-                    var i_etq2 = document.createElement('i');
-                    i_etq2.classList.add('mdi', 'mdi-close');
-                    /* Anidar elementos */
-                    mod_modificar.appendChild(i_etq1);
-                    acciones.appendChild(mod_modificar);                        
-                    //acciones.appendChild(i_etq1);
-                    mod_eliminar.appendChild(i_etq2);
-                    acciones.appendChild(mod_eliminar);
-                    //acciones.appendChild(i_etq2);
-                    fila.appendChild(numero);
-                    fila.appendChild(codigo);
-                    fila.appendChild(nombre);
-                    fila.appendChild(acciones);
-                    tabla.appendChild(fila);
+                if(respuesta.result.length < 1){
+                    toastr.error("No se han cargado los cursos", "Error");
+                }else{
+                    for(var i = 0; i < respuesta.result.length; i++){
+                        // toastr.info("Cursos","Leyendo");
+                        console.log(respuesta.result[i]);
+                        var actual = respuesta.result[i];
+                        var fila = document.createElement('tr');
+                        /* Crear elementos */
+                        var numero = document.createElement('td');
+                        numero.innerHTML = i + 1;
+                        var codigo = document.createElement('td');
+                        codigo.innerHTML = actual.codigo;
+                        var nombre = document.createElement('td');
+                        nombre.innerHTML = actual.nombre;
+                        var codigoCatedratico = document.createElement('td');
+                        codigoCatedratico.innerHTML = actual.codigoCatedratico;
+                        var acciones = document.createElement('td');
+                        acciones.innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;';                        
+                        var mod_modificar = document.createElement('a');                        
+                        mod_modificar.setAttribute('onclick', 'mostrarFila(this);');                        
+                        mod_modificar.setAttribute('data-toggle','tooltip');
+                        mod_modificar.setAttribute('data-placement', 'top');
+                        mod_modificar.setAttribute('title', 'Modificar');                        
+                        var i_etq1 = document.createElement('i');
+                        i_etq1.classList.add('mdi', 'mdi-check');
+                        var mod_eliminar = document.createElement('a');
+                        mod_eliminar.setAttribute('onclick', 'mostrarFilaE(this)');
+                        mod_eliminar.setAttribute('data-toggle','tooltip');
+                        mod_eliminar.setAttribute('data-placement', 'top');
+                        mod_eliminar.setAttribute('title', 'Borrar');
+                        var i_etq2 = document.createElement('i');
+                        i_etq2.classList.add('mdi', 'mdi-close');
+                        /* Anidar elementos */
+                        mod_modificar.appendChild(i_etq1);
+                        acciones.appendChild(mod_modificar);                        
+                        //acciones.appendChild(i_etq1);
+                        mod_eliminar.appendChild(i_etq2);
+                        acciones.appendChild(mod_eliminar);
+                        //acciones.appendChild(i_etq2);
+                        fila.appendChild(numero);
+                        fila.appendChild(codigo);
+                        fila.appendChild(nombre);
+                        fila.appendChild(codigoCatedratico);
+                        fila.appendChild(acciones);
+                        tabla.appendChild(fila);
+                    }
+                    toastr.success("Se han cargado los cursos.", "Muy bien")
                 }
-            });          
+            });
         }
         function mostrarFila(fila){
             var fila_act = fila.parentNode.parentNode.rowIndex;
             var codigo = document.getElementById('tabla-cursos').rows[fila_act].cells[1].innerHTML;
             var nombre = document.getElementById('tabla-cursos').rows[fila_act].cells[2].innerHTML;
-            alert('Codigo: ' + codigo + ', Nombre: ' + nombre);            
+            var codigoCatedratico = document.getElementById('tabla-cursos').rows[fila_act].cells[3].innerHTML;
+            toastr.warning('Codigo: ' + codigo + ', Nombre: ' + nombre+', Codigo catedratico: '+codigoCatedratico, "Atención");
             document.getElementById('txt-codigo').innerHTML = codigo;
-            document.getElementById('txt-nombre').innerHTML = nombre;            
-            $('#modificar-catedratico').on('show.bs.modal', function(){                
+            document.getElementById('txt-nombre').innerHTML = nombre;          
+            document.getElementById('txt-codigo-catedratico').innerHTML = codigoCatedratico;
+            $('#modificar-curso').on('show.bs.modal', function(){                
                 $('#txt-codigo').val(codigo);
                 $('#txt-nombre').val(nombre);
+                $('#txt-codigo-catedratico').val(codigoCatedratico);
                 $('#s-num-fila').attr('data-row', fila_act);
             });
-            $('#modificar-catedratico').modal('show');                        
-        }           
+            $('#modificar-curso').modal('show');                        
+        }
+        function mostrarFilaE(fila){
+            var fila_act = fila.parentNode.parentNode.rowIndex;
+            var codigo = document.getElementById('tabla-cursos').rows[fila_act].cells[1].innerHTML;
+            var nombre = document.getElementById('tabla-cursos').rows[fila_act].cells[2].innerHTML;
+            var codigoCatedratico = document.getElementById('tabla-cursos').rows[fila_act].cells[3].innerHTML;
+            toastr.warning('Codigo: ' + codigo + ', Nombre: ' + nombre+', Codigo catedratico: '+codigoCatedratico, "Atención");
+            document.getElementById('txt-codigo-e').innerHTML = codigo;
+            document.getElementById('txt-nombre-e').innerHTML = nombre;          
+            document.getElementById('txt-codigo-catedratico-e').innerHTML = codigoCatedratico;
+            $('#eliminar-curso').on('show.bs.modal', function(){                
+                $('#txt-codigo-e').val(codigo);
+                $('#txt-nombre-e').val(nombre);
+                $('#txt-codigo-catedratico-e').val(codigoCatedratico);
+                $('#s-num-fila').attr('data-row', fila_act);
+            });
+            $('#eliminar-curso').modal('show');                                           
+        }    
     </script>    
 </head>
 
@@ -253,7 +282,7 @@
                     <ul id="sidebarnav" class="p-t-30">
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../index.html" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../proyecto2/carga.html" aria-expanded="false"><i class="mdi mdi mdi-network-upload"></i><span class="hide-menu">Cargar</span></a></li>
-                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../pages-calendar.html" aria-expanded="false"><i class="mdi mdi-calendar-check"></i><span class="hide-menu">Calendario</span></a></li>
+                            
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Tablas</span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
                                     <li class="sidebar-item"><a href="../proyecto2/catedraticos.html" class="sidebar-link"><i class="mdi mdi-contacts"></i><span class="hide-menu">Catedraticos</span></a></li>
@@ -290,8 +319,8 @@
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Library</li>
+                                    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Gestor</li>
                                 </ol>
                             </nav>
                         </div>
@@ -319,7 +348,8 @@
                                     <tr>
                                       <th scope="col"><b>#</b></th>
                                       <th scope="col"><b>Código</b></th>
-                                      <th scope="col"><b>Nombre</b></th>                                      
+                                      <th scope="col"><b>Nombre</b></th>
+                                      <th scope="col"><b>Código catedratico</b></th>                                    
                                       <th scope="col"><b>Acciones</b></th>
                                     </tr>
                                   </thead>
@@ -361,7 +391,7 @@
         <!-- ============================================================== -->
     </div>
     <!-- Modal Modificar Catedrático -->
-    <div class="modal fade none-border" id="modificar-catedratico">
+    <div class="modal fade none-border" id="modificar-curso">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -379,18 +409,57 @@
                                 <label class="control-label">Nombre</label>                                    
                                 <input class="form-control form-white" placeholder="Nombre" type="text" id="txt-nombre" name="category-name" required/>
                             </div>
+                            <div class="col-md-6">
+                                    <label class="control-label">Codigo catedratico</label>                                    
+                                    <input class="form-control form-white" placeholder="Codigo catedratico" type="text" id="txt-codigo-catedratico" name="category-name" required/>
+                                </div>
                         </div>
                         <span id="s-num-fila" data-row="0" style="display:none;"></span>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal" onclick="modificarCatedratico(document.getElementById('txt-codigo').innerHTML, document.getElementById('txt-nombre').innerHTML)">Guardar</button>
+                    <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal" onclick="modificarCurso(document.getElementById('txt-codigo').innerHTML, document.getElementById('txt-nombre').innerHTML, document.getElementById('txt-codigo-catedratico').innerHTML)">Guardar</button>
                     <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
     </div>
-        <!-- END MODAL -->        
+    <!-- END MODAL -->
+    <!-- Modal Modificar Catedrático -->
+    <div class="modal fade none-border" id="eliminar-curso">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"><strong>Eliminar</strong> Información</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="row">                                
+                                <div class="col-md-6">
+                                    <label class="control-label">Código</label>
+                                    <input class="form-control form-white" type="text" id="txt-codigo-e" name="category-name" disabled />
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="control-label">Nombre</label>                                    
+                                    <input class="form-control form-white" placeholder="Nombre" type="text" id="txt-nombre-e" name="category-name" required/>
+                                </div>
+                                <div class="col-md-6">
+                                        <label class="control-label">Codigo catedratico</label>                                    
+                                        <input class="form-control form-white" placeholder="Codigo catedratico" type="text" id="txt-codigo-catedratico-e" name="category-name" required/>
+                                </div>
+                            </div>
+                            <span id="s-num-fila" data-row="0" style="display:none;"></span>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal" onclick="eliminarCurso(document.getElementById('txt-codigo-e').innerHTML, document.getElementById('txt-nombre-e').innerHTML, document.getElementById('txt-codigo-catedratico-e').innerHTML)">Eliminar</button>
+                        <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END MODAL -->
     <!-- ============================================================== -->
     <!-- End Wrapper -->
     <!-- ============================================================== -->
@@ -429,12 +498,22 @@
     <script> 
         function mostrarModalModificar(fila){            
             var fila_act = fila;
-            alert(typeof(fila_act.type));
+            toastr.warning(typeof(fila_act.type), "Atención");
             var fila = obtenerFila(fila);
             $('#mod_modificar').on('show.bs.modal', function(event){
                 $(this).find("#txt-codigo").text(fila);
             });
-            alert(fila.id);
+            toastr.warning(fila.id, "Atención");
+        }
+
+        function mostrarModalEliminar(fila){            
+            var fila_act = fila;
+            toastr.warning(typeof(fila_act.type), "Atención");
+            var fila = obtenerFila(fila);
+            $('#mod_eliminar').on('show.bs.modal', function(event){
+                $(this).find("#txt-codigo-e").text(fila);
+            });
+            toastr.warning(fila.id, "Atención");
         }
         
         function obtenerFila(fila){
@@ -442,36 +521,64 @@
         }
     </script>
     <script>
-        function modificarCatedratico(){
-            var codigo = $('#modificar-catedratico #txt-codigo').val().trim();
-            var nombre = $('#modificar-catedratico #txt-nombre').val().trim();
-            if(codigo == "" || nombre == ""){
-                alert('Error #1');           
+        function modificarCurso(){
+            var codigo = $('#modificar-curso #txt-codigo').val().trim();
+            var nombre = $('#modificar-curso #txt-nombre').val().trim();
+            var codigoCatedratico = $('#modificar-curso #txt-codigo-catedratico').val().trim();
+            if(codigo == "" || nombre == "" || codigoCatedratico == ""){
+                toastr.error('Error #1', "Error");
                 return;
             }
             var obj_mod = {};
-            var obj_cat = {};
+            var obj_cur = {};
             obj_mod.codigo = codigo;
             obj_mod.nombre = nombre;
-            obj_cat.catedratico = obj_mod;
-            alert(JSON.stringify(obj_cat));
-            obj_cat_json = JSON.stringify(obj_cat);
-            httpPost(edit_curso, obj_cat_json, function(response){
+            obj_mod.codigoCatedratico = codigoCatedratico;
+            obj_cur.codigo = codigo;
+            obj_cur.curso = obj_mod;
+            // alert(JSON.stringify(obj_cur));
+            obj_cur_json = JSON.stringify(obj_cur);
+            httpPost(edit_curso, obj_cur_json, function(response){
                 var respuesta = JSON.parse(response);
                 if(respuesta.result == "Curso actualizado."){
-                    var n_fila = $('#modificar-catedratico #s-num-fila').attr('data-row');
+                    var n_fila = $('#modificar-curso #s-num-fila').attr('data-row');
                     var fila = document.getElementById('tabla-cursos').rows[n_fila].cells;
                     fila[2].innerHTML = nombre;
+                    fila[3].innerHTML = codigoCatedratico;
                     document.getElementById('tabla-cursos').rows[fila];
                     // alert('Registro modificado exitosamente.');
                     toastr.success("Curso editado correctamente","Exito");
                 }else{
-                    toastr.alert("No se pudieron realizar los cambios","Atencion");
+                    toastr.warning("No se pudieron realizar los cambios","Atencion");
                     // alert('No se pudieron realizar los cambios.');
                 }
             });
         }
-    </script>    
+    </script>
+    <script>
+            function eliminarCurso(){
+                var codigo = $('#eliminar-curso #txt-codigo-e').val().trim();
+                var nombre = $('#eliminar-curso #txt-nombre-e').val().trim();
+                var codigoCatedratico = $('#eliminar-curso #txt-codigo-catedratico-e').val().trim();
+                if(codigo == "" || nombre == "" || codigoCatedratico == ""){
+                    toastr.error('Error #1', "Error");           
+                    return;
+                }
+                var obj_mod = {};
+                obj_mod.codigo = codigo;
+                // alert(JSON.stringify(obj_cur));
+                obj_cur_json = JSON.stringify(obj_mod);
+                httpPost(delete_curso, obj_cur_json, function(response){
+                    var respuesta = JSON.parse(response);
+                    if(respuesta.result == "Curso eliminado."){
+                        toastr.success("Curso eliminado correctamente","Exito");
+                    }else{
+                        toastr.warning("No se pudieron realizar los cambios","Atencion");
+                        // alert('No se pudieron realizar los cambios.');
+                    }
+                });
+            }
+        </script>
 </body>
 
 </html>

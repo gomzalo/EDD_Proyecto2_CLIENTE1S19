@@ -39,11 +39,7 @@
                 image_catedratico.src = "data:image/png;base64,"+respuesta.result;
                 // document.body.appendChild(image_catedratico);
                 $("#rep-catedraticos").prepend(image_catedratico);
-
-                $(".rep-catedraticos-class a").click(function(){
-                    var path = $(this).attr("href");
-                    $(image_catedratico.src).attr({src: path});
-                });
+                $("#rep-cat").attr("href", image_catedratico.src);
             });
 
             httpGet(get_cursos64, function(response){
@@ -52,6 +48,7 @@
                 image_curso.src = "data:image/png;base64,"+respuesta.result;
                 // document.body.appendChild(image_curso);
                 $("#rep-cursos").prepend(image_curso);
+                $("#rep-cur").attr("href", image_curso.src);
             });
 
             httpGet(get_salones64, function(response){
@@ -60,6 +57,7 @@
                 image_salon.src = "data:image/png;base64,"+respuesta.result;
                 // document.body.appendChild(image_salon);
                 $("#rep-salones").prepend(image_salon);
+                $("#rep-sal").attr("href", image_salon.src);
             });
         });
     </script>
@@ -225,7 +223,7 @@
                     <ul id="sidebarnav" class="p-t-30">
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../index.html" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../proyecto2/carga.html" aria-expanded="false"><i class="mdi mdi mdi-network-upload"></i><span class="hide-menu">Cargar</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../proyecto2/calendario.html" aria-expanded="false"><i class="mdi mdi-calendar-check"></i><span class="hide-menu">Calendario</span></a></li>
+                        
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Tablas</span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
                                     <li class="sidebar-item"><a href="../proyecto2/catedraticos.html" class="sidebar-link"><i class="mdi mdi-contacts"></i><span class="hide-menu">Catedraticos</span></a></li>
@@ -262,8 +260,8 @@
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Library</li>
+                                    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Gestor</li>
                                 </ol>
                             </nav>
                         </div>
@@ -285,11 +283,14 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="card">
                             <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1" id="rep-catedraticos"> <img src="../../../assets/images/big/img1.jpg" alt="user" />
+                                <div class="el-card-avatar el-overlay-1" id="rep-catedraticos"> 
+                                    <!-- <img src="../../../assets/images/big/img1.jpg" alt="user" /> -->
                                     <div class="el-overlay">
                                         <ul class="list-style-none el-info">
-                                            <li class="el-item"><a id="rep-catedraticos-class" class="btn default btn-outline image-popup-vertical-fit el-link" href="../../../assets/images/big/img1.jpg"><i class="mdi mdi-magnify-plus"></i></a></li>
-                                            <li class="el-item"><a class="btn default btn-outline el-link" href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li>
+                                            <li class="el-item">
+                                                <a id="rep-cat" class="btn default btn-outline image-popup-vertical-fit el-link" href="../../../assets/images/big/img2.jpg"><i class="mdi mdi-magnify-plus"></i></a>
+                                            </li>
+                                            <!-- <li class="el-item"><a class="btn default btn-outline el-link" href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li> -->
                                         </ul>
                                     </div>
                                 </div>
@@ -302,16 +303,19 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="card">
                             <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1" id="rep-cursos"> <img src="../../../assets/images/big/img2.jpg" alt="user" />
+                                <div class="el-card-avatar el-overlay-1" id="rep-cursos"> 
+                                    <!-- <img src="../../../assets/images/big/img2.jpg" alt="user" /> -->
                                     <div class="el-overlay">
                                         <ul class="list-style-none el-info">
-                                            <li class="el-item"><a class="btn default btn-outline image-popup-vertical-fit el-link" href="../../../assets/images/big/img2.jpg"><i class="mdi mdi-magnify-plus"></i></a></li>
-                                            <li class="el-item"><a class="btn default btn-outline el-link" href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li>
+                                            <li class="el-item">
+                                                <a id="rep-cur" class="btn default btn-outline image-popup-vertical-fit el-link" href="../../../assets/images/big/img2.jpg"><i class="mdi mdi-magnify-plus"></i></a>
+                                            </li>
+                                            <!-- <li class="el-item"><a class="btn default btn-outline el-link" href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li> -->
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="el-card-content">
-                                    <h4 class="m-b-0">Lista</h4> <span class="text-muted">Reporte de los cursos en la lista circular ordenada</span>
+                                    <h4 class="m-b-0">Cursos</h4> <span class="text-muted">Reporte de los cursos en la lista circular ordenada</span>
                                 </div>
                             </div>
                         </div>
@@ -319,16 +323,19 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="card">
                             <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1" id="rep-salones"> <img src="../../../assets/images/big/img3.jpg" alt="user" />
+                                <div class="el-card-avatar el-overlay-1" id="rep-salones">
+                                    <!-- <img src="../../../assets/images/big/img3.jpg" alt="user" /> -->
                                     <div class="el-overlay">
                                         <ul class="list-style-none el-info">
-                                            <li class="el-item"><a class="btn default btn-outline image-popup-vertical-fit el-link" href="../../../assets/images/big/img3.jpg"><i class="mdi mdi-magnify-plus"></i></a></li>
-                                            <li class="el-item"><a class="btn default btn-outline el-link" href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li>
+                                            <li class="el-item">
+                                                <a id="rep-sal" class="btn default btn-outline image-popup-vertical-fit el-link" href="../../../assets/images/big/img3.jpg"><i class="mdi mdi-magnify-plus"></i></a>
+                                            </li>
+                                            <!-- <li class="el-item"><a class="btn default btn-outline el-link" href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li> -->
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="el-card-content">
-                                    <h4 class="m-b-0">Matriz</h4> <span class="text-muted">Reporte de los salones en la matriz</span>
+                                    <h4 class="m-b-0">Salones</h4> <span class="text-muted">Reporte de los salones en la matriz</span>
                                 </div>
                             </div>
                         </div>

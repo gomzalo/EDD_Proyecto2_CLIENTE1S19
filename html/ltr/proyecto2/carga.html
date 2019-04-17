@@ -183,7 +183,6 @@
                     <ul id="sidebarnav" class="p-t-30">
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../index.html" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../proyecto2/carga.html" aria-expanded="false"><i class="mdi mdi mdi-network-upload"></i><span class="hide-menu">Cargar</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../proyecto2/calendario.html" aria-expanded="false"><i class="mdi mdi-calendar-check"></i><span class="hide-menu">Calendario</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Tablas</span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
                                     <li class="sidebar-item"><a href="../proyecto2/catedraticos.html" class="sidebar-link"><i class="mdi mdi-contacts"></i><span class="hide-menu">Catedraticos</span></a></li>
@@ -220,8 +219,8 @@
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Library</li>
+                                    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Gestor</li>
                                 </ol>
                             </nav>
                         </div>
@@ -328,6 +327,7 @@
     <script src="../../../node_modules/jquery-csv/src/jquery.csv.js"></script>
     <script>
         $(document).ready(function(){
+            toastr.info("Sube los archivos de cada categoria","Bienvenido");
 
             // Listener para el file upload
             document.getElementById('carga_catedraticos_csv').addEventListener('change', upload_catedraticos, false);
@@ -371,7 +371,8 @@
             // Lectura
             function upload_catedraticos(evt) {
                 if (!browserSupportFileUpload()) {
-                    alert('The File APIs are not fully supported in this browser!');
+                    // alert('The File APIs are not fully supported in this browser!');
+                    toastr.error("La API File, no es soportada por tu navegador", "Error");
                     } else {
                         // Variable donde se almacenara el archivo .csv como arreglo
                         var data = null;
@@ -389,6 +390,7 @@
                                 var catedraticos_arr = {
                                     catedraticos: []
                                 };
+                                toastr.info("Catedraticos","Cargando");
                                 // alert('Imported -' + data.length + '- rows successfully!');
                                 data.forEach(function(element){
                                     var codigo = element[0];
@@ -399,24 +401,26 @@
                                         "nombre" : nombre
                                     });
                                 });
-
+                                toastr.success("Se han cargado los catedraticos", "Muy bien");
                                 // Eliminando la primera linea que contiene los encabezados
                                 catedraticos_arr.catedraticos.shift();
                                 
                                 var obj = JSON.stringify(catedraticos_arr);
                                 console.log(obj);
                                 // Enviando el POST a la funcion para cargar catedraticos en el servidor
-                                httpPost(cargar_catedraticoss, obj, function(response){
-                                    var result = JSON.parse(response);
-                                    console.log(result.result);
+                                httpPost(cargar_catedraticos, obj, function(response){
+                                    var respuesta = JSON.parse(response);
+                                    // if(respuesta.result == "Curso ingresado")
+                                    console.log(respuesta.result);
                                     
                                 });
                             } else {
-                                alert('No data to import!');
+                                tostr.warning("No se importó nada", "Alerta");
                             }
                         };
                         reader.onerror = function() {
-                            alert('Unable to read ' + file.fileName);
+                            // alert('Unable to read ' + file.fileName);
+                            toastr.error("No se pudo leer el archivo.","Error");
                         };
                     }
                 }
@@ -424,7 +428,8 @@
 
                 function upload_cursos(evt) {
                 if (!browserSupportFileUpload()) {
-                    alert('The File APIs are not fully supported in this browser!');
+                    // alert('The File APIs are not fully supported in this browser!');
+                    toastr.error("La API File, no es soportada por tu navegador", "Error");
                     } else {
                         // Variable donde se almacenara el archivo .csv como arreglo
                         var data = null;
@@ -442,6 +447,7 @@
                                 var cursos_arr = {
                                     cursos: []
                                 };
+                                toastr.info("Cursos","Cargando");
                                 // alert('Imported -' + data.length + '- rows successfully!');
                                 data.forEach(function(element){
                                     var codigo = element[0];
@@ -454,7 +460,7 @@
                                         "codigoCatedratico":codigoCatedratico
                                     });
                                 });
-
+                                toastr.success("Se han cargado los cursos", "Muy bien");
                                 // Eliminando la primera linea que contiene los encabezados
                                 cursos_arr.cursos.shift();
 
@@ -462,24 +468,24 @@
                                 console.log(obj1);
                                 // Enviando el POST a la funcion para cargar cursos en el servidor
                                 httpPost(cargar_cursos, obj1, function(response){
-                                    var result = JSON.parse(response);
-                                    console.log(result.result);
+                                    var respuesta = JSON.parse(response);
+                                    console.log(respuesta.result);
                                     
                                 });
                             } else {
-                                alert('No data to import!');
+                                tostr.warning("No se importó nada", "Alerta");
                             }
                         };
                         reader.onerror = function() {
-                            alert('Unable to read ' + file.fileName);
+                            toastr.error('Unable to read ' + file.fileName, "Error");
                         };
                     }
                 }
 
                 function upload_salones(evt) {
                 if (!browserSupportFileUpload()) {
-                    alert('The File APIs are not fully supported in this browser!');
-                    toastr.warning("Tu navegador no soporta la API de lectura","Alerta");
+                    // alert('The File APIs are not fully supported in this browser!');
+                    toastr.error("Tu navegador no soporta la API de lectura","Error");
                     } else {
                         // Variable donde se almacenara el archivo .csv
                         var data = null;
@@ -497,7 +503,7 @@
                                 var salones_arr = {
                                     salones: []
                                 };
-                                toastr.info("Salones","Leyendo");
+                                toastr.info("Salones","Cargando");
                                 // alert('Imported -' + data.length + '- rows successfully!');
                                 data.forEach(function(element){
                                     var edificio = element[0];
@@ -512,7 +518,7 @@
                                         "capacidad" : capacidad
                                     });
                                 });
-
+                                toastr.success("Se han cargado los salones", "Muy bien");
                                 // Eliminando la primera linea que contiene los encabezados
                                 salones_arr.salones.shift();
 
@@ -520,17 +526,18 @@
                                 console.log(obj2);
                                 // Enviando el POST a la funcion para cargar salones en el servidor
                                 httpPost(cargar_salones, obj2, function(response){
-                                    var result = JSON.parse(response);
-                                    console.log(result.result);
-                                    toastr.info(result.result,"Resultado");
+                                    var respuesta = JSON.parse(response);
+                                    // console.log(respuesta.result);
+                                    toastr.info(respuesta.result,"Resultado");
                                 });
                             } else {
                                 // alert('No data to import!');
-                                toastr.error("No se importo nada","Error");
+                                // toastr.error("No se importo nada","Error");
+                                tostr.warning("No se importó nada", "Alerta");
                             }
                         };
                         reader.onerror = function() {
-                            alert('Unable to read ' + file.fileName);
+                            // alert('Unable to read ' + file.fileName);
                             toastr.error("No se pudo leer el archivo.","Error");
                         };
                     }
