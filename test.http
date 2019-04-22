@@ -38,60 +38,62 @@ POST http://localhost:8080/proyecto2/api/newuser HTTP/1.1
 content-type: application/json
 
 {
-	"codigo":"11we",
-	"nombre":"awqwsd",
-	"contrasena":"eas"
+	"codigo":"bdsee22",
+	"nombre":"qwsd",
+	"contrasena":"e12s"
 }
 
 
 ###
-POST http://localhost:8080/proyecto2/api/cargarcatedraticos HTTP/1.1
+POST http://localhost:8080/proyecto2/api/loadusers HTTP/1.1
 content-type: application/json
+
+[
+	{
+	"codigo":"WX23",
+	"nombre":"Rosita",
+	"contrasena":"admin123"
+	},
+	{
+	"codigo":"B233",
+	"nombre":"Willy",
+	"contrasena":"root"
+	},
+	{
+	"codigo":"E991",
+	"nombre":"Martha",
+	"contrasena":"soysuper10"
+	}
+]
+
+###
+
+POST http://localhost:8080/proyecto2/api/edituser HTTP/1.1
+content-type: application/json
+
 
 {
-	"catedraticos":
-				[
-					{
-					"codigo":"AX23",
-					"nombre":"Ing. asd"
-					},
-					{
-					"codigo":"AX33",
-					"nombre":"Ing. a3eed"
-					}
-				]
+	"codigo_editar":"o192",
+	"codigo":"o1924",
+	"nombre":"Martha Garcia",
+	"contrasena":"soysuper101"
 }
 
 ###
 
-POST http://localhost:9098/proyecto2/api/editcatedratico HTTP/1.1
+POST http://localhost:8080/proyecto2/api/deleteuser HTTP/1.1
 content-type: application/json
 
-
-{
-	"codigo":"AX993",
-	"catedratico":
-				{
-				"codigo":"AX993",
-				"nombre":"Ing. nueva putita"
-                }
-}
+{"codigo": "AX23"}
 
 ###
 
-POST http://localhost:8080/proyecto2/api/deletecatedratico HTTP/1.1
-content-type: application/json
-
-{"codigo": "AX9990"}
-
-###
-
-GET http://localhost:8080/proyecto2/api/getarbolcatedraticos HTTP/1.1
+GET http://localhost:8080/proyecto2/api/getusers HTTP/1.1
 content-type: application/json
 
 ###
 
-GET http://localhost:8080/proyecto2/api/getgraficausarios HTTP/1.1
+GET http://localhost:8080/proyecto2/api/getusers64 HTTP/1.1
 content-type: application/json
 
 
@@ -131,7 +133,6 @@ content-type: application/json
 				}
 			]
 }
-
 
 ###
 

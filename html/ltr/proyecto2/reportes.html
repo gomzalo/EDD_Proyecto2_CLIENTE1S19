@@ -33,13 +33,13 @@
     <!-- Obteniendo las imagenes -->
     <script>
         $(document).ready(function(){
-            httpGet(get_catedraticos64, function(response){
+            httpGet(get_users64, function(response){
                 var respuesta = JSON.parse(response);
-                var image_catedratico = new Image();
-                image_catedratico.src = "data:image/png;base64,"+respuesta.result;
-                // document.body.appendChild(image_catedratico);
-                $("#rep-catedraticos").prepend(image_catedratico);
-                $("#rep-cat").attr("href", image_catedratico.src);
+                var image_usuario = new Image();
+                image_usuario.src = "data:image/png;base64,"+respuesta.result;
+                // document.body.appendChild(image_usuario);
+                $("#rep-usuarios").prepend(image_usuario);
+                $("#rep-cat").attr("href", image_usuario.src);
             });
 
             httpGet(get_cursos64, function(response){
@@ -223,10 +223,10 @@
                     <ul id="sidebarnav" class="p-t-30">
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../index.html" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../proyecto2/carga.html" aria-expanded="false"><i class="mdi mdi mdi-network-upload"></i><span class="hide-menu">Cargar</span></a></li>
-                        
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../proyecto2/reportes.html" aria-expanded="false"><i class="mdi mdi-chart-scatterplot-hexbin"></i><span class="hide-menu">Reportes</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Tablas</span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                    <li class="sidebar-item"><a href="../proyecto2/catedraticos.html" class="sidebar-link"><i class="mdi mdi-contacts"></i><span class="hide-menu">Catedraticos</span></a></li>
+                                    <li class="sidebar-item"><a href="../proyecto2/usuarios.html" class="sidebar-link"><i class="mdi mdi-contacts"></i><span class="hide-menu">Usuarios</span></a></li>
                                     <li class="sidebar-item"><a href="../proyecto2/cursos.html" class="sidebar-link"><i class="mdi mdi-school"></i><span class="hide-menu">Cursos</span></a></li>
                                     <li class="sidebar-item"><a href="../proyecto2/edificios.html" class="sidebar-link"><i class="mdi mdi-calendar-clock"></i><span class="hide-menu">Edificios</span></a></li>
                             </ul>
@@ -283,7 +283,7 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="card">
                             <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1" id="rep-catedraticos"> 
+                                <div class="el-card-avatar el-overlay-1" id="rep-usuarios"> 
                                     <!-- <img src="../../../assets/images/big/img1.jpg" alt="user" /> -->
                                     <div class="el-overlay">
                                         <ul class="list-style-none el-info">
@@ -295,7 +295,7 @@
                                     </div>
                                 </div>
                                 <div class="el-card-content">
-                                    <h4 class="m-b-0">Catedraticos</h4> <span class="text-muted">Reporte de catedraticos en el arbol de busqueda binaria</span>
+                                    <h4 class="m-b-0">Usuarios</h4> <span class="text-muted">Reporte de usuarios en el arbol AVL.</span>
                                 </div>
                             </div>
                         </div>

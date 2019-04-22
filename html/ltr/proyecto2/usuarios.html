@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
-    <title>Catedraticos</title>
+    <title>Usuarios</title>
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="../../../assets/extra-libs/multicheck/multicheck.css">
     <link href="../../../assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
@@ -30,15 +30,15 @@
     <script src="../../../dist/js/proyecto2/requests.js"></script>
     <script src="../../../dist/js/proyecto2/generico.js"></script>
     <script>
-        function llenarTablaCatedraticos(){
-            httpGet(get_catedraticos, function(response){                
+        function llenarTablaUsuarios(){
+            httpGet(get_users, function(response){                
                 var respuesta = JSON.parse(response);                    
                 var tabla = document.getElementById('lista');
                 if(respuesta.result.length < 1){
-                    toastr.error("No se han cargado los catedraticos", "Error");
+                    toastr.error("No se han cargado los usuarios", "Error");
                 }else{
                     for(var i = 0; i < respuesta.result.length; i++){
-                        // toastr.info("Catedraticos","Leyendo");
+                        // toastr.info("Usuarios","Leyendo");
                         console.log(respuesta.result[i]);
                         var actual = respuesta.result[i];
                         var fila = document.createElement('tr');
@@ -49,6 +49,8 @@
                         codigo.innerHTML = actual.codigo;
                         var nombre = document.createElement('td');
                         nombre.innerHTML = actual.nombre;
+                        var contrasena = document.createElement('td');
+                        contrasena.innerHTML = actual.contrasena;
                         var acciones = document.createElement('td');
                         acciones.innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;';                        
                         var mod_modificar = document.createElement('a');                        
@@ -75,40 +77,47 @@
                         fila.appendChild(numero);
                         fila.appendChild(codigo);
                         fila.appendChild(nombre);
+                        fila.appendChild(contrasena);
                         fila.appendChild(acciones);
                         tabla.appendChild(fila);
                     }
-                    toastr.success("Se han cargado los catedraticos.", "Muy bien");
+                    toastr.success("Se han cargado los usuarios.", "Muy bien");
                 }
             });          
         }
         function mostrarFila(fila){
             var fila_act = fila.parentNode.parentNode.rowIndex;
-            var codigo = document.getElementById('tabla-catedraticos').rows[fila_act].cells[1].innerHTML;
-            var nombre = document.getElementById('tabla-catedraticos').rows[fila_act].cells[2].innerHTML;
+            var codigo = document.getElementById('tabla-usuarios').rows[fila_act].cells[1].innerHTML;
+            var nombre = document.getElementById('tabla-usuarios').rows[fila_act].cells[2].innerHTML;
+            var contrasena = document.getElementById('tabla-usuarios').rows[fila_act].cells[3].innerHTML;
             toastr.warning('Codigo: ' + codigo + ', Nombre: ' + nombre, "Atención");
             document.getElementById('txt-codigo').innerHTML = codigo;
-            document.getElementById('txt-nombre').innerHTML = nombre;            
-            $('#modificar-catedratico').on('show.bs.modal', function(){                
+            document.getElementById('txt-nombre').innerHTML = nombre;
+            document.getElementById('txt-contrasena').innerHTML = contrasena;
+            $('#modificar-usuario').on('show.bs.modal', function(){                
                 $('#txt-codigo').val(codigo);
                 $('#txt-nombre').val(nombre);
+                $('#txt-contrasena').val(contrasena);
                 $('#s-num-fila').attr('data-row', fila_act);
             });
-            $('#modificar-catedratico').modal('show');                        
+            $('#modificar-usuario').modal('show');                        
         }
         function mostrarFilaE(fila){
             var fila_act = fila.parentNode.parentNode.rowIndex;
-            var codigo = document.getElementById('tabla-catedraticos').rows[fila_act].cells[1].innerHTML;
-            var nombre = document.getElementById('tabla-catedraticos').rows[fila_act].cells[2].innerHTML;
+            var codigo = document.getElementById('tabla-usuarios').rows[fila_act].cells[1].innerHTML;
+            var nombre = document.getElementById('tabla-usuarios').rows[fila_act].cells[2].innerHTML;
+            var contrasena = document.getElementById('tabla-usuarios').rows[fila_act].cells[3].innerHTML;
             toastr.warning('Codigo: ' + codigo + ', Nombre: ' + nombre, "Atención");
             document.getElementById('txt-codigo-e').innerHTML = codigo;
-            document.getElementById('txt-nombre-e').innerHTML = nombre;            
-            $('#eliminar-catedratico').on('show.bs.modal', function(){                
+            document.getElementById('txt-nombre-e').innerHTML = nombre;
+            document.getElementById('txt-contrasena').innerHTML = contrasena;
+            $('#eliminar-usuario').on('show.bs.modal', function(){                
                 $('#txt-codigo-e').val(codigo);
                 $('#txt-nombre-e').val(nombre);
+                $('#txt-contrasena-e').val(contrasena);
                 $('#s-num-fila').attr('data-row', fila_act);
             });
-            $('#eliminar-catedratico').modal('show');                        
+            $('#eliminar-usuario').modal('show');                        
         }
     </script>    
 </head>
@@ -273,9 +282,10 @@
                     <ul id="sidebarnav" class="p-t-30">
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../index.html" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../proyecto2/carga.html" aria-expanded="false"><i class="mdi mdi mdi-network-upload"></i><span class="hide-menu">Cargar</span></a></li>
+                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../proyecto2/reportes.html" aria-expanded="false"><i class="mdi mdi-chart-scatterplot-hexbin"></i><span class="hide-menu">Reportes</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Tablas</span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                    <li class="sidebar-item"><a href="../proyecto2/catedraticos.html" class="sidebar-link"><i class="mdi mdi-contacts"></i><span class="hide-menu">Catedraticos</span></a></li>
+                                    <li class="sidebar-item"><a href="../proyecto2/usuarios.html" class="sidebar-link"><i class="mdi mdi-contacts"></i><span class="hide-menu">Usuarios</span></a></li>
                                     <li class="sidebar-item"><a href="../proyecto2/cursos.html" class="sidebar-link"><i class="mdi mdi-school"></i><span class="hide-menu">Cursos</span></a></li>
                                     <li class="sidebar-item"><a href="../proyecto2/edificios.html" class="sidebar-link"><i class="mdi mdi-calendar-clock"></i><span class="hide-menu">Edificios</span></a></li>
                             </ul>
@@ -305,7 +315,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">Catedráticos</h4>
+                        <h4 class="page-title">Usuarios</h4>
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
@@ -333,17 +343,18 @@
                             <div class="card-body">
                                 <h5 class="card-title m-b-0">Lista</h5>
                             </div>
-                            <table class="table" id="tabla-catedraticos">
+                            <table class="table" id="tabla-usuarios">
                                   <thead>
                                     <tr>
                                       <th scope="col"><b>#</b></th>
                                       <th scope="col"><b>Código</b></th>
-                                      <th scope="col"><b>Nombre</b></th>                                      
+                                      <th scope="col"><b>Nombre</b></th>
+                                      <th scope="col"><b>Contraseña</b></th>
                                       <th scope="col"><b>Acciones</b></th>
                                     </tr>
                                   </thead>
                                   <tbody id="lista">
-                                      <script>llenarTablaCatedraticos();</script>
+                                      <script>llenarTablaUsuarios();</script>
                                   </tbody>
                             </table>
                         </div>                                                    
@@ -379,8 +390,8 @@
         <!-- End Page wrapper  -->
         <!-- ============================================================== -->
     </div>
-    <!-- Modal Modificar Catedrático -->
-    <div class="modal fade none-border" id="modificar-catedratico">
+    <!-- Modal Modificar Usuario -->
+    <div class="modal fade none-border" id="modificar-usuario">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -398,20 +409,24 @@
                                 <label class="control-label">Nombre</label>                                    
                                 <input class="form-control form-white" placeholder="Nombre" type="text" id="txt-nombre" name="category-name" required/>
                             </div>
+                            <div class="col-md-6">
+                                <label class="control-label">Contraseña</label>                                    
+                                <input class="form-control form-white" placeholder="Contrasena" type="text" id="txt-contrasena" name="category-name" required/>
+                            </div>
                         </div>
                         <span id="s-num-fila" data-row="0" style="display:none;"></span>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal" onclick="modificarCatedratico(document.getElementById('txt-codigo').innerHTML, document.getElementById('txt-nombre').innerHTML)">Guardar</button>
+                    <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal" onclick="modificarUsuario(document.getElementById('txt-codigo').innerHTML, document.getElementById('txt-nombre').innerHTML, document.getElementById('txt-contrasena').innerHTML)">Guardar</button>
                     <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
     </div>
     <!-- END MODAL -->  
-    <!-- Modal eliminar catedrático -->
-    <div class="modal fade none-border" id="eliminar-catedratico">
+    <!-- Modal eliminar usuario -->
+    <div class="modal fade none-border" id="eliminar-usuario">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -429,12 +444,16 @@
                                 <label class="control-label">Nombre</label>                                    
                                 <input class="form-control form-white" type="text" id="txt-nombre-e" name="category-name" disabled/>
                             </div>
+                            <div class="col-md-6">
+                                <label class="control-label">Contraseña</label>                                    
+                                <input class="form-control form-white" type="text" id="txt-contrasena-e" name="category-name" disabled/>
+                            </div>
                         </div>
                         <span id="s-num-fila" data-row="0" style="display:none;"></span>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal" onclick="eliminarCatedratico(document.getElementById('txt-codigo-e').innerHTML, document.getElementById('txt-nombre-e').innerHTML)">Eliminar</button>
+                    <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal" onclick="eliminarUsuario(document.getElementById('txt-codigo-e').innerHTML, document.getElementById('txt-nombre-e').innerHTML, document.getElementById('txt-contrasena-e').innerHTML)">Eliminar</button>
                     <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
@@ -479,13 +498,11 @@
     <script> 
         function mostrarModalModificar(fila){            
             var fila_act = fila;
-            // alert(typeof(fila_act.type));
             toastr.warning(typeof(fila_act.type), "Atención");
             var fila = obtenerFila(fila);
             $('#mod_modificar').on('show.bs.modal', function(event){
                 $(this).find("#txt-codigo").text(fila);
             });
-            // alert(fila.id);
             toastr.warning(fila.id, "Atención");
         }
 
@@ -507,31 +524,32 @@
         }
     </script>
     <script>
-        function modificarCatedratico(){
-            var codigo = $('#modificar-catedratico #txt-codigo').val().trim();
-            var nombre = $('#modificar-catedratico #txt-nombre').val().trim();
-            if(codigo == "" || nombre == ""){
-                // alert('Error #1');
+        function modificarUsuario(){
+            var codigo = $('#modificar-usuario #txt-codigo').val().trim();
+            var nombre = $('#modificar-usuario #txt-nombre').val().trim();
+            var contrasena = $('#modificar-usuario #txt-contrasena').val().trim();
+            if(codigo == "" || nombre == "" || contrasena == ""){
                 toastr.error("Error #1", "Error");   
                 return;
             }
-            var obj_mod = {};
+            // var obj_mod = {};
             var obj_cat = {};
-            obj_mod.codigo = codigo;
-            obj_mod.nombre = nombre;
+            obj_cat.codigo_editar = codigo;
             obj_cat.codigo = codigo;
-            obj_cat.catedratico = obj_mod;
+            obj_cat.nombre = nombre;
+            obj_cat.contrasena = contrasena;
+            // obj_cat.usuario = obj_mod;
             // alert(JSON.stringify(obj_cat));
             obj_cat_json = JSON.stringify(obj_cat);
-            httpPost(edit_catedratico, obj_cat_json, function(response){
+            httpPost(edit_user, obj_cat_json, function(response){
                 var respuesta = JSON.parse(response);
-                if(respuesta.result == "Catedratico editado correctamente."){
-                    var n_fila = $('#modificar-catedratico #s-num-fila').attr('data-row');
-                    var fila = document.getElementById('tabla-catedraticos').rows[n_fila].cells;
+                if(respuesta.result == "Usuario editado correctamente."){
+                    var n_fila = $('#modificar-usuario #s-num-fila').attr('data-row');
+                    var fila = document.getElementById('tabla-usuarios').rows[n_fila].cells;
                     fila[2].innerHTML = nombre;
-                    document.getElementById('tabla-catedraticos').rows[fila];
+                    document.getElementById('tabla-usuarios').rows[fila];
                     // alert('Registro modificado exitosamente.');
-                    toastr.success("Catedratico editado correctamente","Exito");
+                    toastr.success("Usuario editado correctamente","Exito");
                 }else{
                     // alert('No se pudieron realizar los cambios.');
                     toastr.error("No se pudieron realizar los cambios", "Error");
@@ -540,11 +558,11 @@
         }
     </script>
     <script>
-        function eliminarCatedratico(){
-            var codigo = $('#eliminar-catedratico #txt-codigo-e').val().trim();
-            var nombre = $('#eliminar-catedratico #txt-nombre-e').val().trim();
-            if(codigo == "" || nombre == ""){
-                // alert('Error #1');
+        function eliminarUsuario(){
+            var codigo = $('#eliminar-usuario #txt-codigo-e').val().trim();
+            var nombre = $('#eliminar-usuario #txt-nombre-e').val().trim();
+            var contrasena = $('#eliminar-usuario #txt-contrasena-e').val().trim();
+            if(codigo == "" || nombre == "" || contrasena == ""){
                 toastr.error("Error #1", "Error");   
                 return;
             }
@@ -552,18 +570,12 @@
             obj_mod.codigo = codigo;
             // alert(JSON.stringify(obj_cat));
             obj_cat_json = JSON.stringify(obj_mod);
-            httpPost(delete_catedratico, obj_cat_json, function(response){
+            httpPost(delete_user, obj_cat_json, function(response){
                 var respuesta = JSON.parse(response);
-                if(respuesta.result == "Catedratico eliminado."){
-                    // var n_fila = $('#modificar-catedratico #s-num-fila').attr('data-row');
-                    // var fila = document.getElementById('tabla-catedraticos').rows[n_fila].cells;
-                    // fila[2].innerHTML = nombre;
-                    // document.getElementById('tabla-catedraticos').rows[fila];
-                    // alert('Registro modificado exitosamente.');
-                    toastr.success("Catedratico eliminado correctamente","Exito");
+                if(respuesta.result == "Usuario eliminado."){
+                    toastr.success("Usuario eliminado correctamente","Exito");
                 }else{
-                    // alert('No se pudieron realizar los cambios.');
-                    toastr.error("No se pudo eliminar el catedratico", "Error");
+                    toastr.error("No se pudo eliminar el usuario", "Error");
                 }
             });
         }
