@@ -18,19 +18,6 @@ content-type: application/json
 	"password":"201318652"
 }
 
-// :::::::::::::::::::::::::::::::::::::::::::::::		LOGIN		 :::::::::::::::::::::::::::::::::::::::::::::::
-
-###
-
-POST http://localhost:8080/proyecto2/api/login HTTP/1.1
-content-type: application/json
-
-
-{
-	"user":"admin",
-	"password":"201318652"
-}
-
 // :::::::::::::::::::::::::::::::::::::::::::::::		USUARIOS		 :::::::::::::::::::::::::::::::::::::::::::::::
 
 ###
@@ -68,15 +55,26 @@ content-type: application/json
 
 ###
 
+POST http://localhost:8080/proyecto2/api/loginuser HTTP/1.1
+content-type: application/json
+
+
+{
+	"codigo":"WX23",
+	"contrasena":"soysuper101"
+}
+
+###
+
 POST http://localhost:8080/proyecto2/api/edituser HTTP/1.1
 content-type: application/json
 
 
 {
-	"codigo_editar":"o192",
-	"codigo":"o1924",
-	"nombre":"Martha Garcia",
-	"contrasena":"soysuper101"
+	"codigo_editar":"WX23",
+	"codigo":"WX23",
+	"nombre":"Rosita Garcia",
+	"contrasena":"soysuper10122"
 }
 
 ###
@@ -97,114 +95,385 @@ GET http://localhost:8080/proyecto2/api/getusers64 HTTP/1.1
 content-type: application/json
 
 
-// :::::::::::::::::::::::::::::::::::::::::::::::		CURSOS		 :::::::::::::::::::::::::::::::::::::::::::::::
+// :::::::::::::::::::::::::::::::::::::::::::::::		RUTAS		 :::::::::::::::::::::::::::::::::::::::::::::::
 
 ###
 
-POST http://localhost:8080/proyecto2/api/newcurso HTTP/1.1
+POST http://localhost:8080/proyecto2/api/newdestination HTTP/1.1
 content-type: application/json
 
 {
-	"curso":
+	"codigo":"7725",
+	"pais":"Paris"
+}
+
+
+###
+POST http://localhost:8080/proyecto2/api/loaddestinations HTTP/1.1
+content-type: application/json
+
+[
+	{
+		"codigo":"7720",
+		"pais":"Guatemala"
+	},
+	{
+		"codigo":"7721",
+		"pais":"El Salvador"
+	},
+	{
+		"codigo":"7722",
+		"pais":"Honduras"
+	},
+	{
+		"codigo":"7723",
+		"pais":"Nicaragua"
+	}
+]
+
+###
+
+POST http://localhost:8080/proyecto2/api/newroute HTTP/1.1
+content-type: application/json
+
+
+{
+	"codigo_destino_1":"7725",
+	"codigo_destino_2":"7723",
+	"costo":"2200",
+	"tiempo":"20"
+}
+
+###
+
+POST http://localhost:8080/proyecto2/api/loadroutes HTTP/1.1
+content-type: application/json
+
+[
+	{
+		"codigo_destino_1":"7722",
+		"codigo_destino_2":"7723",
+		"costo":"200",
+		"tiempo":"30"
+	},
+	{
+		"codigo_destino_1":"7720",
+		"codigo_destino_2":"7722",
+		"costo":"215",
+		"tiempo":"45"
+	},
+	{
+		"codigo_destino_1":"7723",
+		"codigo_destino_2":"7721",
+		"costo":"260",
+		"tiempo":"75"
+	}
+]
+
+###
+
+POST http://localhost:8080/proyecto2/api/loadroutes HTTP/1.1
+content-type: application/json
+
+[
+	{
+		"codigo_destino_1":"7720",
+		"codigo_destino_2":"7721",
+		"costo":"200",
+		"tiempo":"30"
+	},
+	{
+		"codigo_destino_1":"7720",
+		"codigo_destino_2":"7722",
+		"costo":"215",
+		"tiempo":"45"
+	},
+	{
+		"codigo_destino_1":"7723",
+		"codigo_destino_2":"7721",
+		"costo":"260",
+		"tiempo":"75"
+	}
+]
+###
+
+POST http://localhost:8080/proyecto2/api/editroute HTTP/1.1
+content-type: application/json
+
+
+{
+	"codigo_destino_1":"7725",
+	"codigo_destino_2":"7723",
+	"costo":"2300",
+	"tiempo":"22"
+}
+
+###
+
+POST http://localhost:8080/proyecto2/api/deleteroute HTTP/1.1
+content-type: application/json
+
+{
+	"codigo_destino_1":"7725",
+	"codigo_destino_2":"7723",
+	"costo":"2200",
+	"tiempo":"20"
+}
+
+###
+
+POST http://localhost:8080/proyecto2/api/removeroute HTTP/1.1
+content-type: application/json
+
+{
+	"codigo_destino_1":"7725",
+	"codigo_destino_2":"7723",
+	"costo":"2200",
+	"tiempo":"20"
+}
+
+###
+
+GET http://localhost:8080/proyecto2/api/getroutes HTTP/1.1
+content-type: application/json
+
+###
+
+GET http://localhost:8080/proyecto2/api/getroutes64 HTTP/1.1
+content-type: application/json
+
+// :::::::::::::::::::::::::::::::::::::::::::::::		FACTURAS		 :::::::::::::::::::::::::::::::::::::::::::::::
+
+###
+
+POST http://localhost:8080/proyecto2/api/newbill HTTP/1.1
+content-type: application/json
+
+{
+	"fecha":"150",
+	"hora":"4:33",
+	"costo":"456",
+	"detalle":"Guatemala, El Salvador",
+	"usuario_factura":
+					{
+					"codigo":"B233"
+					}
+}
+
+###
+
+POST http://localhost:8080/proyecto2/api/loadbills HTTP/1.1
+content-type: application/json
+
+[
+	{
+		"fecha":"15/03/2019",
+		"hora":"4:33",
+		"costo":"150",
+		"detalle":"Guatemala, El Salvador",
+		"usuario_factura":
+						{
+							"codigo":"B233"
+						}
+	},
+	{
+		"fecha":"31/01/2019",
+		"hora":"14:33",
+		"costo":"600",
+		"detalle":"Guatemala, Honduras",
+		"usuario_factura":
+						{
+							"codigo":"E991"
+						}
+	},
+	{
+		"fecha":"04/04/2019",
+		"hora":"22:20",
+		"costo":"550",
+		"detalle":"Guatemala, Panama",
+		"usuario_factura":
+						{
+							"codigo":"WX23"
+						}
+	}
+]
+
+###
+
+# No funciona
+POST http://localhost:8080/proyecto2/api/editbill HTTP/1.1
+content-type: application/json
+
+{
+	"fecha":"15/03/2019",
+	"hora":"4:33",
+	"costo":"150",
+	"detalle":"Guatemala, Honduras",
+	"usuario_factura":
+					{
+						"codigo":"B233"
+					}
+}
+
+###
+
+GET http://localhost:8080/proyecto2/api/getbills HTTP/1.1
+content-type: application/json
+
+###
+
+GET http://localhost:8080/proyecto2/api/getbills64 HTTP/1.1
+content-type: application/json
+
+// :::::::::::::::::::::::::::::::::::::::::::::::		RESERVACIONES		 :::::::::::::::::::::::::::::::::::::::::::::::
+
+
+###
+
+POST http://localhost:8080/proyecto2/api/newreservation HTTP/1.1
+content-type: application/json
+
+{
+	"nombre_cliente":"Rosita",
+	"tiempo_vuelo":"43",
+	"costo_total":456
+}
+
+###
+
+POST http://localhost:8080/proyecto2/api/loadreservations HTTP/1.1
+content-type: application/json
+
+[
+	{
+		"nombre_cliente":"Rosita",
+		"tiempo_vuelo":"43",
+		"costo_total":456
+	},
+	{
+		"nombre_cliente":"Willy",
+		"tiempo_vuelo":"3",
+		"costo_total":126
+	},
+	{
+		"nombre_cliente":"Martha",
+		"tiempo_vuelo":"22",
+		"costo_total":434
+	}
+]
+
+
+###
+
+GET http://localhost:8080/proyecto2/api/getreservations HTTP/1.1
+content-type: application/json
+
+###
+
+GET http://localhost:8080/proyecto2/api/getreservations64 HTTP/1.1
+content-type: application/json
+
+// :::::::::::::::::::::::::::::::::::::::::::::::		VALIDACIONES		 :::::::::::::::::::::::::::::::::::::::::::::::
+
+
+###
+
+POST http://localhost:8080/proyecto2/api/newvalidation HTTP/1.1
+content-type: application/json
+
+{
+	"factura":
 			{
-			"codigo":"oo88",
-			"nombre":"Arqui",
-			"codigoCatedratico":"Auu3"
+				"fecha":"150",
+				"hora":"4:33",
+				"costo":"456",
+				"detalle":"Guatemala, El Salvador",
+				"usuario_factura":
+								{
+									"codigo":"B233"
+								}
 			}
 }
 
 ###
 
-POST http://localhost:8080/proyecto2/api/cargarcursos HTTP/1.1
+POST http://localhost:8080/proyecto2/api/loadvalidations HTTP/1.1
 content-type: application/json
 
-{
-	"cursos":
-			[
+[
+	{
+		"factura":
 				{
-				"codigo":"oo99",
-				"nombre":"Arqui",
-				"codigoCatedratico":"Auu3"
-				},
-				{
-				"codigo":"oo88",
-				"nombre":"Conta",
-				"codigoCatedratico":"aaaa"
+				"fecha":"15/03/2019",
+				"hora":"4:33",
+				"costo":"150",
+				"detalle":"Guatemala, El Salvador",
+				"usuario_factura":
+								{
+									"codigo":"B233"
+								}
 				}
-			]
-}
-
-###
-
-POST http://localhost:9098/proyecto2/api/editcurso HTTP/1.1
-content-type: application/json
-
-
-{
-	"codigo":"pp099",
-	"curso":
-			{
-			"codigo":"pp100",
-			"nombre":"EDD",
-			"nombreCatedratico":"Inga. Niurka"
-			}
-}
-
-###
-
-POST http://localhost:9098/proyecto2/api/deletecurso HTTP/1.1
-content-type: application/json
-
-{"codigo": "uu88"}
-
-###
-
-GET http://localhost:8080/proyecto2/api/getlistacursos HTTP/1.1
-content-type: application/json
-
-###
-
-GET http://localhost:8080/proyecto2/api/getgraficalista HTTP/1.1
-content-type: application/json
-
-// :::::::::::::::::::::::::::::::::::::::::::::::		SALONES		 :::::::::::::::::::::::::::::::::::::::::::::::
-
-###
-
-POST http://localhost:8080/proyecto2/api/newsalon HTTP/1.1
-content-type: application/json
-
-{
-	"salon":
-			{
-			"csalon":"102",
-			"fedificio":"T-1",
-			"capacidad":"150"
-			}
-}
-
-###
-
-POST http://localhost:8080/proyecto2/api/cargarsalones HTTP/1.1
-content-type: application/json
-
-{
-	"salones":
-			[
+	},
+	{
+		"factura":
 				{
-				"csalon":"412",
-				"fedificio":"T-3",
-				"capacidad":"85"
-				},
-				{
-				"csalon":"212",
-				"fedificio":"T-2",
-				"capacidad":"34"
+				"fecha":"31/01/2019",
+				"hora":"14:33",
+				"costo":"600",
+				"detalle":"Guatemala, Honduras",
+				"usuario_factura":
+								{
+									"codigo":"E991"
+								}
 				}
-			]
-}
+	},
+	{
+		"factura":
+				{
+				"fecha":"04/04/2019",
+				"hora":"22:20",
+				"costo":"550",
+				"detalle":"Guatemala, Panama",
+				"usuario_factura":
+								{
+									"codigo":"WX23"
+								}
+				}
+	}
+]
 
 ###
 
-GET http://localhost:8080/proyecto2/api/getgraficamatriz HTTP/1.1
+POST http://localhost:8080/proyecto2/api/deletevalidation HTTP/1.1
+content-type: application/json
+{
+		"factura":
+				{
+					"fecha":"04/04/2019",
+					"hora":"22:20",
+					"costo":"550",
+					"detalle":"Guatemala, Panama",
+					"usuario_factura":
+									{
+										"codigo":"WX23"
+									}
+				}
+}
+
+
+###
+
+GET http://localhost:8080/proyecto2/api/getvalidations HTTP/1.1
+content-type: application/json
+
+###
+
+GET http://localhost:8080/proyecto2/api/getvalidations64 HTTP/1.1
+content-type: application/json
+
+// :::::::::::::::::::::::::::::::::::::::::::::::		GRAFICA COMPLETA		 :::::::::::::::::::::::::::::::::::::::::::::::
+
+###
+
+GET http://localhost:8080/proyecto2/api/getcompleta64 HTTP/1.1
 content-type: application/json

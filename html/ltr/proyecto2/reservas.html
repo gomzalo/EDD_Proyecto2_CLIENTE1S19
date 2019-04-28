@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
-    <title>Edificios</title>
+    <title>Reservas</title>
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="../../../assets/extra-libs/multicheck/multicheck.css">
     <link href="../../../assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
@@ -35,18 +35,18 @@
                 var respuesta = JSON.parse(response);                    
                 var tabla = document.getElementById('lista');
                 if(respuesta.result.length < 1){
-                    toastr.error("No se han cargado los edificios", "Error");
+                    toastr.error("No se han cargado los reservas", "Error");
                 }else{
                     for(var i = 0; i < respuesta.result.length; i++){
-                        // toastr.info("Edificios","Leyendo");
+                        // toastr.info("Reservas","Leyendo");
                         console.log(respuesta.result[i]);
                         var actual = respuesta.result[i];
                         var fila = document.createElement('tr');
                         /* Crear elementos */
                         var numero = document.createElement('td');
                         numero.innerHTML = i + 1;
-                        var edificio = document.createElement('td');
-                        edificio.innerHTML = actual.fedificio;
+                        var reserva = document.createElement('td');
+                        reserva.innerHTML = actual.fedificio;
                         var salon = document.createElement('td');
                         salon.innerHTML = actual.csalon;
                         var capacidad = document.createElement('td');
@@ -75,49 +75,49 @@
                         acciones.appendChild(mod_eliminar);
                         //acciones.appendChild(i_etq2);
                         fila.appendChild(numero);
-                        fila.appendChild(edificio);
+                        fila.appendChild(reserva);
                         fila.appendChild(salon);
                         fila.appendChild(capacidad);
                         fila.appendChild(acciones);
                         tabla.appendChild(fila);
                     }
-                    toastr.success("Se han cargado los edificios.", "Muy bien")
+                    toastr.success("Se han cargado los reservas.", "Muy bien")
                 }
             });          
         }
         function mostrarFila(fila){
             var fila_act = fila.parentNode.parentNode.rowIndex;
-            var edificio = document.getElementById('tabla-edificios').rows[fila_act].cells[1].innerHTML;
-            var salon = document.getElementById('tabla-edificios').rows[fila_act].cells[2].innerHTML;
-            var capacidad = document.getElementById('tabla-edificios').rows[fila_act].cells[3].innerHTML;
-            toastr.warning('Edificio: ' + edificio + ', Salon: ' + salon+', Capacidad: '+capacidad, "Atención");
-            document.getElementById('txt-edificios').innerHTML = edificio;
+            var reserva = document.getElementById('tabla-reservas').rows[fila_act].cells[1].innerHTML;
+            var salon = document.getElementById('tabla-reservas').rows[fila_act].cells[2].innerHTML;
+            var capacidad = document.getElementById('tabla-reservas').rows[fila_act].cells[3].innerHTML;
+            toastr.warning('Reserva: ' + reserva + ', Salon: ' + salon+', Capacidad: '+capacidad, "Atención");
+            document.getElementById('txt-reservas').innerHTML = reserva;
             document.getElementById('txt-salones').innerHTML = salon;        
             document.getElementById('txt-capacidad').innerHTML = capacidad;
-            $('#modificar-edificio').on('show.bs.modal', function(){                
-                $('#txt-edificios').val(edificio);
+            $('#modificar-reserva').on('show.bs.modal', function(){                
+                $('#txt-reservas').val(reserva);
                 $('#txt-salones').val(salon);
                 $('#txt-capacidad').val(capacidad);
                 $('#s-num-fila').attr('data-row', fila_act);
             });
-            $('#modificar-edificio').modal('show');                        
+            $('#modificar-reserva').modal('show');                        
         }
         function mostrarFilaE(fila){
             var fila_act = fila.parentNode.parentNode.rowIndex;
-            var edificio = document.getElementById('tabla-edificios').rows[fila_act].cells[1].innerHTML;
-            var salon = document.getElementById('tabla-edificios').rows[fila_act].cells[2].innerHTML;
-            var capacidad = document.getElementById('tabla-edificios').rows[fila_act].cells[3].innerHTML;
-            toastr.warning('Edificio: ' + edificio + ', Salon: ' + salon+', Capacidad: '+capacidad, "Atención");
-            document.getElementById('txt-edificios-e').innerHTML = edificio;
+            var reserva = document.getElementById('tabla-reservas').rows[fila_act].cells[1].innerHTML;
+            var salon = document.getElementById('tabla-reservas').rows[fila_act].cells[2].innerHTML;
+            var capacidad = document.getElementById('tabla-reservas').rows[fila_act].cells[3].innerHTML;
+            toastr.warning('Reserva: ' + reserva + ', Salon: ' + salon+', Capacidad: '+capacidad, "Atención");
+            document.getElementById('txt-reservas-e').innerHTML = reserva;
             document.getElementById('txt-salones-e').innerHTML = salon;        
             document.getElementById('txt-capacidad-e').innerHTML = capacidad;
-            $('#eliminar-edificio').on('show.bs.modal', function(){                
-                $('#txt-edificios-e').val(edificio);
+            $('#eliminar-reserva').on('show.bs.modal', function(){                
+                $('#txt-reservas-e').val(reserva);
                 $('#txt-salones-e').val(salon);
                 $('#txt-capacidad-e').val(capacidad);
                 $('#s-num-fila').attr('data-row', fila_act);
             });
-            $('#eliminar-edificio').modal('show');                        
+            $('#eliminar-reserva').modal('show');                        
         }
     </script>    
 </head>
@@ -230,22 +230,22 @@
                                                     </div>
                                                 </a>
                                                 <!-- Message -->
-                                                <a href="../index2.html" class="link border-top">
-                                                    <div class="d-flex no-block align-items-center p-10">
-                                                        <span class="btn btn-info btn-circle"><i class="ti-settings"></i></span>
-                                                        <div class="m-l-10">
-                                                            <h5 class="m-b-0">Gestor</h5> 
-                                                            <span class="mail-desc">Ir a Dashboard del gestor</span> 
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                                <!-- Message -->
                                                 <a href="../proyecto2/reportes.html" class="link border-top">
                                                     <div class="d-flex no-block align-items-center p-10">
                                                         <span class="btn btn-primary btn-circle"><i class="ti-bar-chart"></i></span>
                                                         <div class="m-l-10">
                                                             <h5 class="m-b-0">Reportes</h5> 
                                                             <span class="mail-desc">Reportes de las estructuras</span> 
+                                                        </div>
+                                                    </div>
+                                                </a> 
+                                                <!-- Message -->
+                                                <a href="../authentication-login.html" class="link border-top">
+                                                    <div class="d-flex no-block align-items-center p-10">
+                                                        <span class="btn btn-info btn-circle"><i class="ti-settings"></i></span>
+                                                        <div class="m-l-10">
+                                                            <h5 class="m-b-0">Salir</h5> 
+                                                            <span class="mail-desc">Cerrar sesión</span> 
                                                         </div>
                                                     </div>
                                                 </a>
@@ -285,9 +285,10 @@
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../proyecto2/reportes.html" aria-expanded="false"><i class="mdi mdi-chart-scatterplot-hexbin"></i><span class="hide-menu">Reportes</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Tablas</span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                    <li class="sidebar-item"><a href="../proyecto2/usuarios.html" class="sidebar-link"><i class="mdi mdi-contacts"></i><span class="hide-menu">Usuarios</span></a></li>
-                                    <li class="sidebar-item"><a href="../proyecto2/cursos.html" class="sidebar-link"><i class="mdi mdi-school"></i><span class="hide-menu">Cursos</span></a></li>
-                                    <li class="sidebar-item"><a href="../proyecto2/edificios.html" class="sidebar-link"><i class="mdi mdi-calendar-clock"></i><span class="hide-menu">Edificios</span></a></li>
+                                <li class="sidebar-item"><a href="../proyecto2/usuarios.html" class="sidebar-link"><i class="mdi mdi-contacts"></i><span class="hide-menu">Usuarios</span></a></li>
+                                <li class="sidebar-item"><a href="../proyecto2/vuelos.html" class="sidebar-link"><i class="mdi mdi-airplane-takeoff"></i><span class="hide-menu">Vuelos</span></a></li>
+                                <li class="sidebar-item"><a href="../proyecto2/rutas.html" class="sidebar-link"><i class="mdi mdi-routes"></i><span class="hide-menu">Rutas</span></a></li>
+                                <li class="sidebar-item"><a href="../proyecto2/reservas.html" class="sidebar-link"><i class="mdi mdi-calendar-multiple-check"></i><span class="hide-menu">Reservas</span></a></li>
                             </ul>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-key"></i><span class="hide-menu">Authenticación</span></a>
@@ -315,7 +316,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">Edificios</h4>
+                        <h4 class="page-title">Reservas</h4>
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
@@ -343,11 +344,11 @@
                             <div class="card-body">
                                 <h5 class="card-title m-b-0">Lista</h5>
                             </div>
-                            <table class="table" id="tabla-edificios">
+                            <table class="table" id="tabla-reservas">
                                   <thead>
                                     <tr>
                                       <th scope="col"><b>#</b></th>
-                                      <th scope="col"><b>Edificio</b></th>
+                                      <th scope="col"><b>Reserva</b></th>
                                       <th scope="col"><b>Salón</b></th>
                                       <th scope="col"><b>Capacidad</b></th>
                                       <th scope="col"><b>Acciones</b></th>
@@ -390,8 +391,8 @@
         <!-- End Page wrapper  -->
         <!-- ============================================================== -->
     </div>
-    <!-- Modal Modificar Edificio -->
-    <div class="modal fade none-border" id="modificar-edificio">
+    <!-- Modal Modificar Reserva -->
+    <div class="modal fade none-border" id="modificar-reserva">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -402,8 +403,8 @@
                     <form>
                         <div class="row">                                
                             <div class="col-md-6">
-                                <label class="control-label">Edificio</label>
-                                <input class="form-control form-white" type="text" id="txt-edificios" name="category-name" disabled />
+                                <label class="control-label">Reserva</label>
+                                <input class="form-control form-white" type="text" id="txt-reservas" name="category-name" disabled />
                             </div>
                             <div class="col-md-6">
                                 <label class="control-label">Salon</label>                                    
@@ -418,27 +419,27 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal" onclick="modificarEdificio(document.getElementById('txt-edificios').innerHTML, document.getElementById('txt-salones').innerHTML, document.getElementById('txt-capacidad').innerHTML)">Guardar</button>
+                    <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal" onclick="modificarEdificio(document.getElementById('txt-reservas').innerHTML, document.getElementById('txt-salones').innerHTML, document.getElementById('txt-capacidad').innerHTML)">Guardar</button>
                     <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
     </div>
     <!-- END MODAL -->
-    <!-- Modal Eliminar Edificio -->
-    <div class="modal fade none-border" id="eliminar-edificio">
+    <!-- Modal Eliminar Reserva -->
+    <div class="modal fade none-border" id="eliminar-reserva">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title"><strong>Edificio</strong> Información</h4>
+                    <h4 class="modal-title"><strong>Reserva</strong> Información</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
                     <form>
                         <div class="row">                                
                             <div class="col-md-6">
-                                <label class="control-label">Edificio</label>
-                                <input class="form-control form-white" type="text" id="txt-edificios-e" name="category-name" disabled />
+                                <label class="control-label">Reserva</label>
+                                <input class="form-control form-white" type="text" id="txt-reservas-e" name="category-name" disabled />
                             </div>
                             <div class="col-md-6">
                                 <label class="control-label">Salon</label>                                    
@@ -453,7 +454,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal" onclick="eliminarEdificios(document.getElementById('txt-edificios-e').innerHTML, document.getElementById('txt-salones-e').innerHTML, document.getElementById('txt-capacidad-e').innerHTML)">Eliminar</button>
+                    <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal" onclick="eliminarEdificios(document.getElementById('txt-reservas-e').innerHTML, document.getElementById('txt-salones-e').innerHTML, document.getElementById('txt-capacidad-e').innerHTML)">Eliminar</button>
                     <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
@@ -501,7 +502,7 @@
             toastr.warning(typeof(fila_act.type), "Atención");
             var fila = obtenerFila(fila);
             $('#mod_modificar').on('show.bs.modal', function(event){
-                $(this).find("#txt-edificios").text(fila);
+                $(this).find("#txt-reservas").text(fila);
             });
             toastr.warning(fila.id, "Atención");
         }
@@ -511,7 +512,7 @@
             toastr.warning(typeof(fila_act.type), "Atención");
             var fila = obtenerFila(fila);
             $('#mod_eliminar').on('show.bs.modal', function(event){
-                $(this).find("#txt-edificios-e").text(fila);
+                $(this).find("#txt-reservas-e").text(fila);
             });
             toastr.warning(fila.id, "Atención");
         }
@@ -522,31 +523,31 @@
     </script>
     <script>
         function modificarEdificio(){
-            var edificio = $('#modificar-edificio #txt-edificios').val().trim();
-            var salon = $('#modificar-edificio #txt-salones').val().trim();
-            var capacidad = $('#modificar-edificio #txt-capacidad').val().trim();
-            if(edificio == "" || salon == "" || capacidad == ""){
+            var reserva = $('#modificar-reserva #txt-reservas').val().trim();
+            var salon = $('#modificar-reserva #txt-salones').val().trim();
+            var capacidad = $('#modificar-reserva #txt-capacidad').val().trim();
+            if(reserva == "" || salon == "" || capacidad == ""){
                 toastr.error('Error #1', "Error");
                 return;
             }
             var obj_mod = {};
             var obj_edi = {};
-            obj_mod.fedificio = edificio;
+            obj_mod.fedificio = reserva;
             obj_mod.csalon = salon;
             obj_mod.capacidad = capacidad;
-            obj_edi.edificio = obj_mod;
+            obj_edi.reserva = obj_mod;
             // alert(JSON.stringify(obj_edi));
             obj_ed_json = JSON.stringify(obj_edi);
             httpPost(edit_edificio, obj_ed_json, function(response){
                 var respuesta = JSON.parse(response);
-                if(respuesta.result == "Edificio actualizado."){
-                    var n_fila = $('#modificar-edificio #s-num-fila').attr('data-row');
-                    var fila = document.getElementById('tabla-edificios').rows[n_fila].cells;
+                if(respuesta.result == "Reserva actualizado."){
+                    var n_fila = $('#modificar-reserva #s-num-fila').attr('data-row');
+                    var fila = document.getElementById('tabla-reservas').rows[n_fila].cells;
                     fila[2].innerHTML = salon;
                     fila[3].innerHTML = capacidad;
-                    document.getElementById('tabla-edificios').rows[fila];
+                    document.getElementById('tabla-reservas').rows[fila];
                     // alert('Registro modificado exitosamente.');
-                    toastr.success("Edificio editado correctamente","Exito");
+                    toastr.success("Reserva editado correctamente","Exito");
                 }else{
                     toastr.warning("No se pudieron realizar los cambios","Atencion");
                     // alert('No se pudieron realizar los cambios.');
@@ -554,26 +555,26 @@
             });
         }
         function eliminarEdificios(){
-            var edificio = $('#eliminar-edificio #txt-edificios-e').val().trim();
-            var salon = $('#eliminar-edificio #txt-salones-e').val().trim();
-            var capacidad = $('#eliminar-edificio #txt-capacidad-e').val().trim();
-            if(edificio == "" || salon == "" || capacidad == ""){
+            var reserva = $('#eliminar-reserva #txt-reservas-e').val().trim();
+            var salon = $('#eliminar-reserva #txt-salones-e').val().trim();
+            var capacidad = $('#eliminar-reserva #txt-capacidad-e').val().trim();
+            if(reserva == "" || salon == "" || capacidad == ""){
                 toastr.error('Campo vacio.', "Error");
                 return;
             }
             var obj_mod = {};
             var obj_edi = {};
-            obj_mod.fedificio = edificio;
+            obj_mod.fedificio = reserva;
             obj_mod.csalon = salon;
             obj_mod.capacidad = capacidad;
-            obj_edi.edificio = obj_mod;
+            obj_edi.reserva = obj_mod;
             // alert(JSON.stringify(obj_edi));
             obj_ed_json = JSON.stringify(obj_edi);
             httpPost(delete_edificio, obj_ed_json, function(response){
                 var respuesta = JSON.parse(response);
-                if(respuesta.result == "Edificio eliminado."){
+                if(respuesta.result == "Reserva eliminado."){
                     // alert('Registro modificado exitosamente.');
-                    toastr.success("Edificio eliminado correctamente","Exito");
+                    toastr.success("Reserva eliminado correctamente","Exito");
                 }else{
                     toastr.warning("No se pudieron realizar los cambios","Atencion");
                     // alert('No se pudieron realizar los cambios.');

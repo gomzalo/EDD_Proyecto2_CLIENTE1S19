@@ -131,22 +131,22 @@
                                                 </div>
                                             </a>
                                             <!-- Message -->
-                                            <a href="../index2.html" class="link border-top">
-                                                <div class="d-flex no-block align-items-center p-10">
-                                                    <span class="btn btn-info btn-circle"><i class="ti-settings"></i></span>
-                                                    <div class="m-l-10">
-                                                        <h5 class="m-b-0">Gestor</h5> 
-                                                        <span class="mail-desc">Ir a Dashboard del gestor</span> 
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
                                             <a href="../proyecto2/reportes.html" class="link border-top">
                                                 <div class="d-flex no-block align-items-center p-10">
                                                     <span class="btn btn-primary btn-circle"><i class="ti-bar-chart"></i></span>
                                                     <div class="m-l-10">
                                                         <h5 class="m-b-0">Reportes</h5> 
                                                         <span class="mail-desc">Reportes de las estructuras</span> 
+                                                    </div>
+                                                </div>
+                                            </a>
+                                              <!-- Message -->
+                                              <a href="../authentication-login.html" class="link border-top">
+                                                <div class="d-flex no-block align-items-center p-10">
+                                                    <span class="btn btn-info btn-circle"><i class="ti-settings"></i></span>
+                                                    <div class="m-l-10">
+                                                        <h5 class="m-b-0">Salir</h5> 
+                                                        <span class="mail-desc">Cerrar sesión</span> 
                                                     </div>
                                                 </div>
                                             </a>
@@ -187,8 +187,9 @@
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Tablas</span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
                                     <li class="sidebar-item"><a href="../proyecto2/usuarios.html" class="sidebar-link"><i class="mdi mdi-contacts"></i><span class="hide-menu">Usuarios</span></a></li>
-                                    <li class="sidebar-item"><a href="../proyecto2/cursos.html" class="sidebar-link"><i class="mdi mdi-school"></i><span class="hide-menu">Cursos</span></a></li>
-                                    <li class="sidebar-item"><a href="../proyecto2/edificios.html" class="sidebar-link"><i class="mdi mdi-calendar-clock"></i><span class="hide-menu">Edificios</span></a></li>
+                                    <li class="sidebar-item"><a href="../proyecto2/vuelos.html" class="sidebar-link"><i class="mdi mdi-airplane-takeoff"></i><span class="hide-menu">Vuelos</span></a></li>
+                                    <li class="sidebar-item"><a href="../proyecto2/rutas.html" class="sidebar-link"><i class="mdi mdi-routes"></i><span class="hide-menu">Rutas</span></a></li>
+                                    <li class="sidebar-item"><a href="../proyecto2/reservas.html" class="sidebar-link"><i class="mdi mdi-calendar-multiple-check"></i><span class="hide-menu">Reservas</span></a></li>
                             </ul>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-key"></i><span class="hide-menu">Authenticación</span></a>
@@ -242,10 +243,10 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">Catedraticos</h5>
+                                <h5 class="card-title">Destinos</h5>
                                 <fieldset>
-                                    <p>Elige el archivo con extension ".csv" que contiene los catedraticos.</p>
-                                    <input type="file" name="carga_catedraticos" id="carga_catedraticos_csv" class="btn btn-primary" accept=".csv">
+                                    <p>Elige el archivo con extension ".csv" que contiene los destinos.</p>
+                                    <input type="file" name="carga_destinos" id="carga_destinos_csv" class="btn btn-primary" accept=".csv">
                                 </fieldset>
                             </div>
                         </div>
@@ -253,18 +254,18 @@
                     <div class="col-md-8">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">Cursos</h5>
-                                <p>Elige el archivo con extension ".csv" que contiene los cursos.</p>
-                                <input type="file" name="carga_cursos" id="carga_cursos_csv" class="btn btn-cyan" accept=".csv">
+                                <h5 class="card-title">Rutas</h5>
+                                <p>Elige el archivo con extension ".csv" que contiene los rutas.</p>
+                                <input type="file" name="carga_rutas" id="carga_rutas_csv" class="btn btn-cyan" accept=".csv">
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">Salones</h5>
-                                <p>Elige el archivo con extension ".csv" <br> contiene los salones.</p>
-                                <input type="file" name="carga_salones" id="carga_salones_csv" class="btn btn-orange" accept=".csv">
+                                <h5 class="card-title">Usuarios</h5>
+                                <p>Elige el archivo con extension ".csv" que<br> contiene los usuarios.</p>
+                                <input type="file" name="carga_usuarios" id="carga_usuarios_csv" class="btn btn-orange" accept=".csv">
                             </div>
                         </div>
                     </div>
@@ -328,12 +329,12 @@
     <script src="../../../node_modules/jquery-csv/src/jquery.csv.js"></script>
     <script>
         $(document).ready(function(){
-            toastr.info("Sube los archivos de cada categoria","Bienvenido");
+            toastr.info("Sube los archivos de los destinos y las rutas","Bienvenido");
 
             // Listener para el file upload
-            document.getElementById('carga_catedraticos_csv').addEventListener('change', upload_catedraticos, false);
-            document.getElementById('carga_cursos_csv').addEventListener('change', upload_cursos, false);
-            document.getElementById('carga_salones_csv').addEventListener('change', upload_salones, false);
+            document.getElementById('carga_destinos_csv').addEventListener('change', upload_destinos, false);
+            document.getElementById('carga_rutas_csv').addEventListener('change', upload_rutas, false);
+            document.getElementById('carga_usuarios_csv').addEventListener('change', upload_usuarios, false);
 
             // Verifica si el navegador soporta HTML5 File API.
             function browserSupportFileUpload() {
@@ -361,16 +362,33 @@
                 if(cadena.includes('ó')){
                     cadena = cadena.replace(/ó/gi, 'o');
                 }
-                if(cadena.includes('á')){
+                if(cadena.includes('ú')){
                     cadena = cadena.replace(/ú/gi, 'u');
                 }
-
+                if(cadena.includes("Ñ")){
+                    cadena = cadena.replace(/Ñ/gi, "N");
+                }
+                if(cadena.includes('Á')){
+                    cadena = cadena.replace(/Á/gi, 'A');
+                }
+                if(cadena.includes('É')){
+                    cadena = cadena.replace(/É/gi, 'E');
+                }
+                if(cadena.includes('Í')){
+                    cadena = cadena.replace(/Í/gi, 'I');
+                }
+                if(cadena.includes('Ó')){
+                    cadena = cadena.replace(/Ó/gi, 'O');
+                }
+                if(cadena.includes('Ú')){
+                    cadena = cadena.replace(/Ú/gi, 'U');
+                }
                 return cadena;
                 // return cadena.allReplace({'á': 'a', 'é': 'e', 'í': 'i', 'ó': 'o', 'ú': 'u', 'ñ': 'n'});
             }
 
             // Lectura
-            function upload_catedraticos(evt) {
+            function upload_destinos(evt) {
                 if (!browserSupportFileUpload()) {
                     // alert('The File APIs are not fully supported in this browser!');
                     toastr.error("La API File, no es soportada por tu navegador", "Error");
@@ -387,31 +405,29 @@
                             data = $.csv.toArrays(csvData);
                             //alert(data);
                             if (data && data.length > 0) {
-                                //Creando objeto catedraticos
-                                var catedraticos_arr = {
-                                    catedraticos: []
-                                };
-                                toastr.info("Catedraticos","Cargando");
+                                //Creando objeto destinos
+                                var destinos_arr = [];
+                                toastr.info("Destinos","Cargando");
                                 // alert('Imported -' + data.length + '- rows successfully!');
                                 data.forEach(function(element){
                                     var codigo = element[0];
-                                    var nombre = element[1];
+                                    var pais = element[1];
 
-                                    catedraticos_arr.catedraticos.push({
+                                    destinos_arr.push({
                                         "codigo" : codigo,
-                                        "nombre" : nombre
+                                        "pais" : pais
                                     });
                                 });
-                                toastr.success("Se han cargado los catedraticos", "Muy bien");
+                                toastr.success("Se han cargado los destinos", "Muy bien");
                                 // Eliminando la primera linea que contiene los encabezados
-                                catedraticos_arr.catedraticos.shift();
+                                destinos_arr.shift();
                                 
-                                var obj = JSON.stringify(catedraticos_arr);
+                                var obj = JSON.stringify(destinos_arr);
                                 console.log(obj);
-                                // Enviando el POST a la funcion para cargar catedraticos en el servidor
-                                httpPost(cargar_catedraticos, obj, function(response){
+                                // Enviando el POST a la funcion para cargar destinos en el servidor
+                                httpPost(load_destinations, obj, function(response){
                                     var respuesta = JSON.parse(response);
-                                    // if(respuesta.result == "Curso ingresado")
+                                    // if(respuesta.result == "Ruta ingresado")
                                     console.log(respuesta.result);
                                     
                                 });
@@ -427,7 +443,7 @@
                 }
                 
 
-                function upload_cursos(evt) {
+                function upload_rutas(evt) {
                 if (!browserSupportFileUpload()) {
                     // alert('The File APIs are not fully supported in this browser!');
                     toastr.error("La API File, no es soportada por tu navegador", "Error");
@@ -444,31 +460,32 @@
                             data = $.csv.toArrays(csvData);
                             // alert(data);
                             if (data && data.length > 0) {
-                                //Creando objeto cursos
-                                var cursos_arr = {
-                                    cursos: []
-                                };
-                                toastr.info("Cursos","Cargando");
+                                //Creando objeto rutas
+                                var rutas_arr = [];
+                                toastr.info("Rutas","Cargando");
                                 // alert('Imported -' + data.length + '- rows successfully!');
                                 data.forEach(function(element){
-                                    var codigo = element[0];
-                                    var nombre = element[1];
-                                    var codigoCatedratico = element[2];
+                                    var codigo_destino_1 = element[0];
+                                    var codigo_destino_2 = element[1];
+                                    var costo = element[2];
+                                    var tiempo = element[3];
 
-                                    cursos_arr.cursos.push({
-                                        "codigo" : codigo,
-                                        "nombre" : nombre,
-                                        "codigoCatedratico":codigoCatedratico
+                                    rutas_arr.push({
+                                        "codigo_destino_1" : codigo_destino_1,
+                                        "codigo_destino_2" : codigo_destino_2,
+                                        "costo": costo,
+                                        "tiempo": tiempo
                                     });
                                 });
-                                toastr.success("Se han cargado los cursos", "Muy bien");
+                                toastr.success("Se han cargado los rutas", "Muy bien");
                                 // Eliminando la primera linea que contiene los encabezados
-                                cursos_arr.cursos.shift();
+                                rutas_arr.shift();
+                                // console.log(rutas_arr);
 
-                                var obj1 = JSON.stringify(cursos_arr);
+                                var obj1 = JSON.stringify(rutas_arr);
                                 console.log(obj1);
-                                // Enviando el POST a la funcion para cargar cursos en el servidor
-                                httpPost(cargar_cursos, obj1, function(response){
+                                // Enviando el POST a la funcion para cargar rutas en el servidor
+                                httpPost(load_routes, obj1, function(response){
                                     var respuesta = JSON.parse(response);
                                     console.log(respuesta.result);
                                     
@@ -483,7 +500,7 @@
                     }
                 }
 
-                function upload_salones(evt) {
+                function upload_usuarios(evt) {
                 if (!browserSupportFileUpload()) {
                     // alert('The File APIs are not fully supported in this browser!');
                     toastr.error("Tu navegador no soporta la API de lectura","Error");
@@ -500,33 +517,29 @@
                             data = $.csv.toArrays(csvData);
                             // alert(data);
                             if (data && data.length > 0) {
-                                //Creando objeto cursos
-                                var salones_arr = {
-                                    salones: []
-                                };
+                                //Creando objeto rutas
+                                var usuarios_arr = [];
                                 toastr.info("Salones","Cargando");
                                 // alert('Imported -' + data.length + '- rows successfully!');
                                 data.forEach(function(element){
-                                    var edificio = element[0];
-                                    // var horario = element[1];
-                                    var salon = element[1];
-                                    var capacidad = element[2];
+                                    var codigo = element[0];
+                                    var nombre = element[1];
+                                    var contrasena = element[2];
 
-                                    salones_arr.salones.push({
-                                        "fedificio" : edificio,
-                                        // "chorario" : horario,
-                                        "csalon" : salon,
-                                        "capacidad" : capacidad
+                                    usuarios_arr.push({
+                                        "codigo" : codigo,
+                                        "nombre" : nombre,
+                                        "contrasena" : contrasena
                                     });
                                 });
                                 toastr.success("Se han cargado los salones", "Muy bien");
                                 // Eliminando la primera linea que contiene los encabezados
-                                salones_arr.salones.shift();
+                                usuarios_arr.shift();
 
-                                var obj2 = JSON.stringify(salones_arr);
+                                var obj2 = JSON.stringify(usuarios_arr);
                                 console.log(obj2);
                                 // Enviando el POST a la funcion para cargar salones en el servidor
-                                httpPost(cargar_salones, obj2, function(response){
+                                httpPost(load_users, obj2, function(response){
                                     var respuesta = JSON.parse(response);
                                     // console.log(respuesta.result);
                                     toastr.info(respuesta.result,"Resultado");

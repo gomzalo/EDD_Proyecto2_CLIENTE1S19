@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
-    <title>Cursos</title>
+    <title>Rutas</title>
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="../../../assets/extra-libs/multicheck/multicheck.css">
     <link href="../../../assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
@@ -35,10 +35,10 @@
                 var respuesta = JSON.parse(response);                    
                 var tabla = document.getElementById('lista');
                 if(respuesta.result.length < 1){
-                    toastr.error("No se han cargado los cursos", "Error");
+                    toastr.error("No se han cargado los rutas", "Error");
                 }else{
                     for(var i = 0; i < respuesta.result.length; i++){
-                        // toastr.info("Cursos","Leyendo");
+                        // toastr.info("Rutas","Leyendo");
                         console.log(respuesta.result[i]);
                         var actual = respuesta.result[i];
                         var fila = document.createElement('tr');
@@ -81,15 +81,15 @@
                         fila.appendChild(acciones);
                         tabla.appendChild(fila);
                     }
-                    toastr.success("Se han cargado los cursos.", "Muy bien")
+                    toastr.success("Se han cargado los rutas.", "Muy bien")
                 }
             });
         }
         function mostrarFila(fila){
             var fila_act = fila.parentNode.parentNode.rowIndex;
-            var codigo = document.getElementById('tabla-cursos').rows[fila_act].cells[1].innerHTML;
-            var nombre = document.getElementById('tabla-cursos').rows[fila_act].cells[2].innerHTML;
-            var codigoCatedratico = document.getElementById('tabla-cursos').rows[fila_act].cells[3].innerHTML;
+            var codigo = document.getElementById('tabla-rutas').rows[fila_act].cells[1].innerHTML;
+            var nombre = document.getElementById('tabla-rutas').rows[fila_act].cells[2].innerHTML;
+            var codigoCatedratico = document.getElementById('tabla-rutas').rows[fila_act].cells[3].innerHTML;
             toastr.warning('Codigo: ' + codigo + ', Nombre: ' + nombre+', Codigo catedratico: '+codigoCatedratico, "Atención");
             document.getElementById('txt-codigo').innerHTML = codigo;
             document.getElementById('txt-nombre').innerHTML = nombre;          
@@ -104,9 +104,9 @@
         }
         function mostrarFilaE(fila){
             var fila_act = fila.parentNode.parentNode.rowIndex;
-            var codigo = document.getElementById('tabla-cursos').rows[fila_act].cells[1].innerHTML;
-            var nombre = document.getElementById('tabla-cursos').rows[fila_act].cells[2].innerHTML;
-            var codigoCatedratico = document.getElementById('tabla-cursos').rows[fila_act].cells[3].innerHTML;
+            var codigo = document.getElementById('tabla-rutas').rows[fila_act].cells[1].innerHTML;
+            var nombre = document.getElementById('tabla-rutas').rows[fila_act].cells[2].innerHTML;
+            var codigoCatedratico = document.getElementById('tabla-rutas').rows[fila_act].cells[3].innerHTML;
             toastr.warning('Codigo: ' + codigo + ', Nombre: ' + nombre+', Codigo catedratico: '+codigoCatedratico, "Atención");
             document.getElementById('txt-codigo-e').innerHTML = codigo;
             document.getElementById('txt-nombre-e').innerHTML = nombre;          
@@ -230,22 +230,22 @@
                                                     </div>
                                                 </a>
                                                 <!-- Message -->
-                                                <a href="../index2.html" class="link border-top">
-                                                    <div class="d-flex no-block align-items-center p-10">
-                                                        <span class="btn btn-info btn-circle"><i class="ti-settings"></i></span>
-                                                        <div class="m-l-10">
-                                                            <h5 class="m-b-0">Gestor</h5> 
-                                                            <span class="mail-desc">Ir a Dashboard del gestor</span> 
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                                <!-- Message -->
                                                 <a href="../proyecto2/reportes.html" class="link border-top">
                                                     <div class="d-flex no-block align-items-center p-10">
                                                         <span class="btn btn-primary btn-circle"><i class="ti-bar-chart"></i></span>
                                                         <div class="m-l-10">
                                                             <h5 class="m-b-0">Reportes</h5> 
                                                             <span class="mail-desc">Reportes de las estructuras</span> 
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                <!-- Message -->
+                                                <a href="../authentication-login.html" class="link border-top">
+                                                    <div class="d-flex no-block align-items-center p-10">
+                                                        <span class="btn btn-info btn-circle"><i class="ti-settings"></i></span>
+                                                        <div class="m-l-10">
+                                                            <h5 class="m-b-0">Salir</h5> 
+                                                            <span class="mail-desc">Cerrar sesión</span> 
                                                         </div>
                                                     </div>
                                                 </a>
@@ -285,9 +285,10 @@
                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../proyecto2/reportes.html" aria-expanded="false"><i class="mdi mdi-chart-scatterplot-hexbin"></i><span class="hide-menu">Reportes</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Tablas</span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                    <li class="sidebar-item"><a href="../proyecto2/usuarios.html" class="sidebar-link"><i class="mdi mdi-contacts"></i><span class="hide-menu">Usuarios</span></a></li>
-                                    <li class="sidebar-item"><a href="../proyecto2/cursos.html" class="sidebar-link"><i class="mdi mdi-school"></i><span class="hide-menu">Cursos</span></a></li>
-                                    <li class="sidebar-item"><a href="../proyecto2/edificios.html" class="sidebar-link"><i class="mdi mdi-calendar-clock"></i><span class="hide-menu">Edificios</span></a></li>
+                                <li class="sidebar-item"><a href="../proyecto2/usuarios.html" class="sidebar-link"><i class="mdi mdi-contacts"></i><span class="hide-menu">Usuarios</span></a></li>
+                                <li class="sidebar-item"><a href="../proyecto2/vuelos.html" class="sidebar-link"><i class="mdi mdi-airplane-takeoff"></i><span class="hide-menu">Vuelos</span></a></li>
+                                <li class="sidebar-item"><a href="../proyecto2/rutas.html" class="sidebar-link"><i class="mdi mdi-routes"></i><span class="hide-menu">Rutas</span></a></li>
+                                <li class="sidebar-item"><a href="../proyecto2/reservas.html" class="sidebar-link"><i class="mdi mdi-calendar-multiple-check"></i><span class="hide-menu">Reservas</span></a></li>
                             </ul>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-key"></i><span class="hide-menu">Authenticación</span></a>
@@ -315,7 +316,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">Cursos</h4>
+                        <h4 class="page-title">Rutas</h4>
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
@@ -343,7 +344,7 @@
                             <div class="card-body">
                                 <h5 class="card-title m-b-0">Lista</h5>
                             </div>
-                            <table class="table" id="tabla-cursos">
+                            <table class="table" id="tabla-rutas">
                                   <thead>
                                     <tr>
                                       <th scope="col"><b>#</b></th>
@@ -540,14 +541,14 @@
             obj_cur_json = JSON.stringify(obj_cur);
             httpPost(edit_curso, obj_cur_json, function(response){
                 var respuesta = JSON.parse(response);
-                if(respuesta.result == "Curso actualizado."){
+                if(respuesta.result == "Ruta actualizado."){
                     var n_fila = $('#modificar-curso #s-num-fila').attr('data-row');
-                    var fila = document.getElementById('tabla-cursos').rows[n_fila].cells;
+                    var fila = document.getElementById('tabla-rutas').rows[n_fila].cells;
                     fila[2].innerHTML = nombre;
                     fila[3].innerHTML = codigoCatedratico;
-                    document.getElementById('tabla-cursos').rows[fila];
+                    document.getElementById('tabla-rutas').rows[fila];
                     // alert('Registro modificado exitosamente.');
-                    toastr.success("Curso editado correctamente","Exito");
+                    toastr.success("Ruta editado correctamente","Exito");
                 }else{
                     toastr.warning("No se pudieron realizar los cambios","Atencion");
                     // alert('No se pudieron realizar los cambios.');
@@ -570,8 +571,8 @@
                 obj_cur_json = JSON.stringify(obj_mod);
                 httpPost(delete_curso, obj_cur_json, function(response){
                     var respuesta = JSON.parse(response);
-                    if(respuesta.result == "Curso eliminado."){
-                        toastr.success("Curso eliminado correctamente","Exito");
+                    if(respuesta.result == "Ruta eliminado."){
+                        toastr.success("Ruta eliminado correctamente","Exito");
                     }else{
                         toastr.warning("No se pudieron realizar los cambios","Atencion");
                         // alert('No se pudieron realizar los cambios.');

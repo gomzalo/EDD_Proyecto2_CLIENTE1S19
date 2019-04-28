@@ -156,22 +156,22 @@
                                                 </div>
                                             </a>
                                             <!-- Message -->
-                                            <a href="index2.html" class="link border-top">
-                                                <div class="d-flex no-block align-items-center p-10">
-                                                    <span class="btn btn-info btn-circle"><i class="ti-settings"></i></span>
-                                                    <div class="m-l-10">
-                                                        <h5 class="m-b-0">Gestor</h5> 
-                                                        <span class="mail-desc">Ir a Dashboard del gestor</span> 
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
                                             <a href="proyecto2/reportes.html" class="link border-top">
                                                 <div class="d-flex no-block align-items-center p-10">
                                                     <span class="btn btn-primary btn-circle"><i class="ti-bar-chart"></i></span>
                                                     <div class="m-l-10">
                                                         <h5 class="m-b-0">Reportes</h5> 
                                                         <span class="mail-desc">Reportes de las estructuras</span> 
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <!-- Message -->
+                                            <a href="authentication-login.html" class="link border-top">
+                                                <div class="d-flex no-block align-items-center p-10">
+                                                    <span class="btn btn-info btn-circle"><i class="ti-settings"></i></span>
+                                                    <div class="m-l-10">
+                                                        <h5 class="m-b-0">Salir</h5> 
+                                                        <span class="mail-desc">Cerrar sesión</span> 
                                                     </div>
                                                 </div>
                                             </a>
@@ -250,8 +250,9 @@
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Tablas</span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
                                 <li class="sidebar-item"><a href="proyecto2/usuarios.html" class="sidebar-link"><i class="mdi mdi-contacts"></i><span class="hide-menu">Usuarios</span></a></li>
-                                <li class="sidebar-item"><a href="proyecto2/cursos.html" class="sidebar-link"><i class="mdi mdi-school"></i><span class="hide-menu">Cursos</span></a></li>
-                                <li class="sidebar-item"><a href="proyecto2/edificios.html" class="sidebar-link"><i class="mdi mdi-calendar-clock"></i><span class="hide-menu">Edificios</span></a></li>
+                                <li class="sidebar-item"><a href="proyecto2/vuelos.html" class="sidebar-link"><i class="mdi mdi-airplane-takeoff"></i><span class="hide-menu">Vuelos</span></a></li>
+                                <li class="sidebar-item"><a href="proyecto2/rutas.html" class="sidebar-link"><i class="mdi mdi-routes"></i><span class="hide-menu">Rutas</span></a></li>
+                                <li class="sidebar-item"><a href="proyecto2/reservas.html" class="sidebar-link"><i class="mdi mdi-calendar-multiple-check"></i><span class="hide-menu">Reservas</span></a></li>
                             </ul>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-key"></i><span class="hide-menu">Autenticación</span></a>
@@ -323,21 +324,30 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Column -->
-                    <div class="col-md-6 col-lg-4 col-xlg-3">
+                     <!-- Column -->
+                     <div class="col-md-6 col-lg-8 col-xlg-3">
                         <div class="card card-hover">
-                            <div class="box bg-warning text-center" id="cursos">
-                                <h1 class="font-light text-white"><i class="mdi mdi-school"></i></h1>
-                                <h6 class="text-white">Cursos</h6>
+                            <div class="box bg-success text-center" id="vuelos">
+                                <h1 class="font-light text-white"><i class="mdi mdi-airplane-takeoff"></i></h1>
+                                <h6 class="text-white">Vuelos</h6>
                             </div>
                         </div>
                     </div>
                     <!-- Column -->
                     <div class="col-md-6 col-lg-4 col-xlg-3">
                         <div class="card card-hover">
-                            <div class="box bg-cyan text-center" id="edificios">
-                                <h1 class="font-light text-white"><i class="mdi mdi-city"></i></h1>
-                                <h6 class="text-white">Edificios</h6>
+                            <div class="box bg-warning text-center" id="rutas">
+                                <h1 class="font-light text-white"><i class="mdi mdi-routes"></i></h1>
+                                <h6 class="text-white">Rutas</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-4 col-xlg-3">
+                        <div class="card card-hover">
+                            <div class="box bg-cyan text-center" id="reservas">
+                                <h1 class="font-light text-white"><i class="mdi mdi-calendar-multiple-check"></i></h1>
+                                <h6 class="text-white">Reservas</h6>
                             </div>
                         </div>
                     </div>
@@ -350,15 +360,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Column -->
-                    <!-- <div class="col-md-6 col-lg-8 col-xlg-3">
-                        <div class="card card-hover">
-                            <div class="box bg-success text-center" id="calendario">
-                                <h1 class="font-light text-white"><i class="mdi mdi-calendar-clock"></i></h1>
-                                <h6 class="text-white">Calendario</h6>
-                            </div>
-                        </div>
-                    </div> -->
                     <!-- Column -->
                     <div class="col-md-6 col-lg-8 col-xlg-3">
                         <div class="card card-hover">
@@ -441,14 +442,14 @@
             toastr.info("Usuarios","Redirigiendo");
             // Code here ma' nigga;
         });
-        $("#cursos").click(function(){        
-            window.location.href = "http://127.0.0.1:8081/html/ltr/proyecto2/cursos.html";
-            toastr.info("Cursos","Redirigiendo");
+        $("#rutas").click(function(){        
+            window.location.href = "http://127.0.0.1:8081/html/ltr/proyecto2/rutas.html";
+            toastr.info("Rutas","Redirigiendo");
             // Code here ma' nigga;
         });
-        $("#edificios").click(function(){        
-            window.location.href = "http://127.0.0.1:8081/html/ltr/proyecto2/edificios.html";
-            toastr.info("Edificios","Redirigiendo");
+        $("#reservas").click(function(){        
+            window.location.href = "http://127.0.0.1:8081/html/ltr/proyecto2/reservas.html";
+            toastr.info("Reservas","Redirigiendo");
             // Code here ma' nigga;
         });
         $("#carga").click(function(){        
@@ -456,11 +457,11 @@
             toastr.info("Carga","Redirigiendo");
             // Code here ma' nigga;
         });
-        // $("#calendario").click(function(){        
-        //     window.location.href = "http://127.0.0.1:8081/html/ltr/proyecto2/calendario.html";
-        //     toastr.info("Calendario","Redirigiendo");
-        //     // Code here ma' nigga;
-        // });
+        $("#vuelos").click(function(){        
+            window.location.href = "http://127.0.0.1:8081/html/ltr/proyecto2/vuelos.html";
+            toastr.info("Vuelos","Redirigiendo");
+            // Code here ma' nigga;
+        });
         $("#reportes").click(function(){        
             window.location.href = "http://127.0.0.1:8081/html/ltr/proyecto2/reportes.html";
             toastr.info("Reportes","Redirigiendo");

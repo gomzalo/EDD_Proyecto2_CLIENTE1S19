@@ -37,27 +37,55 @@
                 var respuesta = JSON.parse(response);
                 var image_usuario = new Image();
                 image_usuario.src = "data:image/png;base64,"+respuesta.result;
-                // document.body.appendChild(image_usuario);
+
                 $("#rep-usuarios").prepend(image_usuario);
-                $("#rep-cat").attr("href", image_usuario.src);
+                $("#rep-usr").attr("href", image_usuario.src);
             });
 
-            httpGet(get_cursos64, function(response){
+            httpGet(get_routes64, function(response){
                 var respuesta = JSON.parse(response);
-                var image_curso = new Image();
-                image_curso.src = "data:image/png;base64,"+respuesta.result;
-                // document.body.appendChild(image_curso);
-                $("#rep-cursos").prepend(image_curso);
-                $("#rep-cur").attr("href", image_curso.src);
+                var image_ruta = new Image();
+                image_ruta.src = "data:image/png;base64,"+respuesta.result;
+
+                $("#rep-rutas").prepend(image_ruta);
+                $("#rep-rts").attr("href", image_ruta.src);
             });
 
-            httpGet(get_salones64, function(response){
+
+            httpGet(get_bills64, function(response){
                 var respuesta = JSON.parse(response);
-                var image_salon = new Image();
-                image_salon.src = "data:image/png;base64,"+respuesta.result;
-                // document.body.appendChild(image_salon);
-                $("#rep-salones").prepend(image_salon);
-                $("#rep-sal").attr("href", image_salon.src);
+                var image_factura = new Image();
+                image_factura.src = "data:image/png;base64,"+respuesta.result;
+
+                $("#rep-factura").prepend(image_factura);
+                $("#rep-fcts").attr("href", image_factura.src);
+            });
+
+            httpGet(get_reservations64, function(response){
+                var respuesta = JSON.parse(response);
+                var image_reservaciones = new Image();
+                image_reservaciones.src = "data:image/png;base64,"+respuesta.result;
+
+                $("#rep-reservaciones").prepend(image_reservaciones);
+                $("#rep-res").attr("href", image_reservaciones.src);
+            });
+            
+            httpGet(get_validations64, function(response){
+                var respuesta = JSON.parse(response);
+                var image_validaciones = new Image();
+                image_validaciones.src = "data:image/png;base64,"+respuesta.result;
+
+                $("#rep-validaciones").prepend(image_validaciones);
+                $("#rep-val").attr("href", image_validaciones.src);
+            });
+
+            httpGet(get_completa64, function(response){
+                var respuesta = JSON.parse(response);
+                var image_completa = new Image();
+                image_completa.src = "data:image/png;base64,"+respuesta.result;
+
+                $("#rep-completa").prepend(image_completa);
+                $("#rep-cplt").attr("href", image_completa.src);
             });
         });
     </script>
@@ -171,22 +199,22 @@
                                                 </div>
                                             </a>
                                             <!-- Message -->
-                                            <a href="../index2.html" class="link border-top">
-                                                <div class="d-flex no-block align-items-center p-10">
-                                                    <span class="btn btn-info btn-circle"><i class="ti-settings"></i></span>
-                                                    <div class="m-l-10">
-                                                        <h5 class="m-b-0">Gestor</h5> 
-                                                        <span class="mail-desc">Ir a Dashboard del gestor</span> 
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
                                             <a href="../proyecto2/reportes.html" class="link border-top">
                                                 <div class="d-flex no-block align-items-center p-10">
                                                     <span class="btn btn-primary btn-circle"><i class="ti-bar-chart"></i></span>
                                                     <div class="m-l-10">
                                                         <h5 class="m-b-0">Reportes</h5> 
                                                         <span class="mail-desc">Reportes de las estructuras</span> 
+                                                    </div>
+                                                </div>
+                                            </a>
+                                              <!-- Message -->
+                                              <a href="../authentication-login.html" class="link border-top">
+                                                <div class="d-flex no-block align-items-center p-10">
+                                                    <span class="btn btn-info btn-circle"><i class="ti-settings"></i></span>
+                                                    <div class="m-l-10">
+                                                        <h5 class="m-b-0">Salir</h5> 
+                                                        <span class="mail-desc">Cerrar sesión</span> 
                                                     </div>
                                                 </div>
                                             </a>
@@ -226,9 +254,10 @@
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../proyecto2/reportes.html" aria-expanded="false"><i class="mdi mdi-chart-scatterplot-hexbin"></i><span class="hide-menu">Reportes</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-move-resize-variant"></i><span class="hide-menu">Tablas</span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                    <li class="sidebar-item"><a href="../proyecto2/usuarios.html" class="sidebar-link"><i class="mdi mdi-contacts"></i><span class="hide-menu">Usuarios</span></a></li>
-                                    <li class="sidebar-item"><a href="../proyecto2/cursos.html" class="sidebar-link"><i class="mdi mdi-school"></i><span class="hide-menu">Cursos</span></a></li>
-                                    <li class="sidebar-item"><a href="../proyecto2/edificios.html" class="sidebar-link"><i class="mdi mdi-calendar-clock"></i><span class="hide-menu">Edificios</span></a></li>
+                                <li class="sidebar-item"><a href="../proyecto2/usuarios.html" class="sidebar-link"><i class="mdi mdi-contacts"></i><span class="hide-menu">Usuarios</span></a></li>
+                                <li class="sidebar-item"><a href="../proyecto2/vuelos.html" class="sidebar-link"><i class="mdi mdi-airplane-takeoff"></i><span class="hide-menu">Vuelos</span></a></li>
+                                <li class="sidebar-item"><a href="../proyecto2/rutas.html" class="sidebar-link"><i class="mdi mdi-routes"></i><span class="hide-menu">Rutas</span></a></li>
+                                <li class="sidebar-item"><a href="../proyecto2/reservas.html" class="sidebar-link"><i class="mdi mdi-calendar-multiple-check"></i><span class="hide-menu">Reservas</span></a></li>
                             </ul>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-key"></i><span class="hide-menu">Authenticación</span></a>
@@ -288,14 +317,14 @@
                                     <div class="el-overlay">
                                         <ul class="list-style-none el-info">
                                             <li class="el-item">
-                                                <a id="rep-cat" class="btn default btn-outline image-popup-vertical-fit el-link" href="../../../assets/images/big/img2.jpg"><i class="mdi mdi-magnify-plus"></i></a>
+                                                <a id="rep-usr" class="btn default btn-outline image-popup-vertical-fit el-link" href="../../../assets/images/big/img2.jpg"><i class="mdi mdi-magnify-plus"></i></a>
                                             </li>
                                             <!-- <li class="el-item"><a class="btn default btn-outline el-link" href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li> -->
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="el-card-content">
-                                    <h4 class="m-b-0">Usuarios</h4> <span class="text-muted">Reporte de usuarios en el arbol AVL.</span>
+                                    <h4 class="m-b-0">Usuarios</h4> <span class="text-muted">Reporte de usuarios en el árbol AVL.</span>
                                 </div>
                             </div>
                         </div>
@@ -303,19 +332,19 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="card">
                             <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1" id="rep-cursos"> 
+                                <div class="el-card-avatar el-overlay-1" id="rep-rutas"> 
                                     <!-- <img src="../../../assets/images/big/img2.jpg" alt="user" /> -->
                                     <div class="el-overlay">
                                         <ul class="list-style-none el-info">
                                             <li class="el-item">
-                                                <a id="rep-cur" class="btn default btn-outline image-popup-vertical-fit el-link" href="../../../assets/images/big/img2.jpg"><i class="mdi mdi-magnify-plus"></i></a>
+                                                <a id="rep-rts" class="btn default btn-outline image-popup-vertical-fit el-link" href="../../../assets/images/big/img2.jpg"><i class="mdi mdi-magnify-plus"></i></a>
                                             </li>
                                             <!-- <li class="el-item"><a class="btn default btn-outline el-link" href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li> -->
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="el-card-content">
-                                    <h4 class="m-b-0">Cursos</h4> <span class="text-muted">Reporte de los cursos en la lista circular ordenada</span>
+                                    <h4 class="m-b-0">Rutas</h4> <span class="text-muted">Reporte de los rutas en la matriz.</span>
                                 </div>
                             </div>
                         </div>
@@ -323,19 +352,79 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="card">
                             <div class="el-card-item">
-                                <div class="el-card-avatar el-overlay-1" id="rep-salones">
-                                    <!-- <img src="../../../assets/images/big/img3.jpg" alt="user" /> -->
+                                <div class="el-card-avatar el-overlay-1" id="rep-facturas"> 
+                                    <!-- <img src="../../../assets/images/big/img2.jpg" alt="user" /> -->
                                     <div class="el-overlay">
                                         <ul class="list-style-none el-info">
                                             <li class="el-item">
-                                                <a id="rep-sal" class="btn default btn-outline image-popup-vertical-fit el-link" href="../../../assets/images/big/img3.jpg"><i class="mdi mdi-magnify-plus"></i></a>
+                                                <a id="rep-fcts" class="btn default btn-outline image-popup-vertical-fit el-link" href="../../../assets/images/big/img2.jpg"><i class="mdi mdi-magnify-plus"></i></a>
                                             </li>
                                             <!-- <li class="el-item"><a class="btn default btn-outline el-link" href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li> -->
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="el-card-content">
-                                    <h4 class="m-b-0">Salones</h4> <span class="text-muted">Reporte de los salones en la matriz</span>
+                                    <h4 class="m-b-0">Facturas</h4> <span class="text-muted">Reporte de los facturas en el árbol B.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="el-card-item">
+                                <div class="el-card-avatar el-overlay-1" id="rep-reservaciones">
+                                    <!-- <img src="../../../assets/images/big/img3.jpg" alt="user" /> -->
+                                    <div class="el-overlay">
+                                        <ul class="list-style-none el-info">
+                                            <li class="el-item">
+                                                <a id="rep-res" class="btn default btn-outline image-popup-vertical-fit el-link" href="../../../assets/images/big/img3.jpg"><i class="mdi mdi-magnify-plus"></i></a>
+                                            </li>
+                                            <!-- <li class="el-item"><a class="btn default btn-outline el-link" href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li> -->
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="el-card-content">
+                                    <h4 class="m-b-0">Reservaciones</h4> <span class="text-muted">Reporte de las reservaciones en la tabla hash.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="el-card-item">
+                                <div class="el-card-avatar el-overlay-1" id="rep-validaciones">
+                                    <!-- <img src="../../../assets/images/big/img3.jpg" alt="user" /> -->
+                                    <div class="el-overlay">
+                                        <ul class="list-style-none el-info">
+                                            <li class="el-item">
+                                                <a id="rep-val" class="btn default btn-outline image-popup-vertical-fit el-link" href="../../../assets/images/big/img3.jpg"><i class="mdi mdi-magnify-plus"></i></a>
+                                            </li>
+                                            <!-- <li class="el-item"><a class="btn default btn-outline el-link" href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li> -->
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="el-card-content">
+                                    <h4 class="m-b-0">Validaciones</h4> <span class="text-muted">Reporte de las validaciones en el blockchain.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="el-card-item">
+                                <div class="el-card-avatar el-overlay-1" id="rep-completo">
+                                    <!-- <img src="../../../assets/images/big/img3.jpg" alt="user" /> -->
+                                    <div class="el-overlay">
+                                        <ul class="list-style-none el-info">
+                                            <li class="el-item">
+                                                <a id="rep-cplt" class="btn default btn-outline image-popup-vertical-fit el-link" href="../../../assets/images/big/img3.jpg"><i class="mdi mdi-magnify-plus"></i></a>
+                                            </li>
+                                            <!-- <li class="el-item"><a class="btn default btn-outline el-link" href="javascript:void(0);"><i class="mdi mdi-link"></i></a></li> -->
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="el-card-content">
+                                    <h4 class="m-b-0">Grafo completo</h4> <span class="text-muted">Reporte completo de las estrutcutras en el proyecto.</span>
                                 </div>
                             </div>
                         </div>
