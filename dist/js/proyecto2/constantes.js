@@ -14,8 +14,9 @@ const load_destinations     =   "http://localhost:8080/proyecto2/api/loaddestina
 const new_route             =   "http://localhost:8080/proyecto2/api/newroute";
 const load_routes           =   "http://localhost:8080/proyecto2/api/loadroutes";
 const edit_route            =   "http://localhost:8080/proyecto2/api/editroute";
-const delete_route          =   "http://localhost:8080/proyecto2/api/deleteroute"; // Este si
+const get_flights           =   "http://localhost:8080/proyecto2/api/getflights";
 const remove_route          =   "http://localhost:8080/proyecto2/api/removeroute"; // Este no :v
+const delete_route          =   "http://localhost:8080/proyecto2/api/deleteroute"; // Este si
 const get_routes            =   "http://localhost:8080/proyecto2/api/getroutes";
 const get_routes64          =   "http://localhost:8080/proyecto2/api/getroutes64";
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::       FACTURAS        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

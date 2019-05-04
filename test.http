@@ -167,34 +167,26 @@ content-type: application/json
 		"codigo_destino_2":"7721",
 		"costo":"260",
 		"tiempo":"75"
+	},
+	{
+		"codigo_destino_1":"7720",
+		"codigo_destino_2":"7723",
+		"costo":"260",
+		"tiempo":"75"
 	}
 ]
 
 ###
 
-POST http://localhost:8080/proyecto2/api/loadroutes HTTP/1.1
+POST http://localhost:8080/proyecto2/api/getflights HTTP/1.1
 content-type: application/json
 
-[
-	{
-		"codigo_destino_1":"7720",
-		"codigo_destino_2":"7721",
-		"costo":"200",
-		"tiempo":"30"
-	},
-	{
-		"codigo_destino_1":"7720",
-		"codigo_destino_2":"7722",
-		"costo":"215",
-		"tiempo":"45"
-	},
-	{
-		"codigo_destino_1":"7723",
-		"codigo_destino_2":"7721",
-		"costo":"260",
-		"tiempo":"75"
-	}
-]
+
+{
+	"codigo_destino_1":"7720",
+	"codigo_destino_2":"7723"
+}
+
 ###
 
 POST http://localhost:8080/proyecto2/api/editroute HTTP/1.1
@@ -334,9 +326,12 @@ POST http://localhost:8080/proyecto2/api/newreservation HTTP/1.1
 content-type: application/json
 
 {
-	"nombre_cliente":"Rosita",
-	"tiempo_vuelo":"43",
-	"costo_total":456
+	"nombre_cliente": "Ruth",
+	"plan_de_vuelo":
+				[
+					{"codigo_destino_1": "7720", "codigo_destino_2": "7723", "costo": "260.0", "tiempo": "75"},
+					{"codigo_destino_1": "7723", "codigo_destino_2": "7722", "costo": "200.0", "tiempo": "30"}
+				]
 }
 
 ###
@@ -345,21 +340,23 @@ POST http://localhost:8080/proyecto2/api/loadreservations HTTP/1.1
 content-type: application/json
 
 [
-	{
-		"nombre_cliente":"Rosita",
-		"tiempo_vuelo":"43",
-		"costo_total":456
-	},
-	{
-		"nombre_cliente":"Willy",
-		"tiempo_vuelo":"3",
-		"costo_total":126
-	},
-	{
-		"nombre_cliente":"Martha",
-		"tiempo_vuelo":"22",
-		"costo_total":434
-	}
+		{
+			"nombre_cliente": "Ruth",
+			"plan_de_vuelo":
+						[
+							{"codigo_destino_1": "7720", "codigo_destino_2": "7723", "costo": "260.0", "tiempo": "75"},
+							{"codigo_destino_1": "7723", "codigo_destino_2": "7722", "costo": "200.0", "tiempo": "30"}
+						]
+		},
+		{
+			"nombre_cliente": "Martha",
+			"plan_de_vuelo":
+						[
+							{"codigo_destino_1": "7720", "codigo_destino_2": "7723", "costo": "260.0", "tiempo": "75"},
+							{"codigo_destino_1": "7722", "codigo_destino_2": "7723", "costo": "200.0", "tiempo": "30"},
+							{"codigo_destino_1": "7723", "codigo_destino_2": "7722", "costo": "200.0", "tiempo": "30"}
+						]
+		}
 ]
 
 

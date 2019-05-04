@@ -30,12 +30,12 @@
     <script src="../../../dist/js/proyecto2/requests.js"></script>
     <script src="../../../dist/js/proyecto2/generico.js"></script>
     <script>
-        function llenarTablaCursos(){
-            httpGet(get_cursos, function(response){                
+        function llenarTablaRutas(){
+            httpGet(get_routes, function(response){                
                 var respuesta = JSON.parse(response);                    
                 var tabla = document.getElementById('lista');
                 if(respuesta.result.length < 1){
-                    toastr.error("No se han cargado los rutas", "Error");
+                    toastr.error("No se han cargado las rutas", "Error");
                 }else{
                     for(var i = 0; i < respuesta.result.length; i++){
                         // toastr.info("Rutas","Leyendo");
@@ -45,14 +45,25 @@
                         /* Crear elementos */
                         var numero = document.createElement('td');
                         numero.innerHTML = i + 1;
-                        var codigo = document.createElement('td');
-                        codigo.innerHTML = actual.codigo;
-                        var nombre = document.createElement('td');
-                        nombre.innerHTML = actual.nombre;
-                        var codigoCatedratico = document.createElement('td');
-                        codigoCatedratico.innerHTML = actual.codigoCatedratico;
+                        var codigo_destino_1 = document.createElement('td');
+                        codigo_destino_1.innerHTML = actual.codigo_destino_1;
+                        var codigo_destino_2 = document.createElement('td');
+                        codigo_destino_2.innerHTML = actual.codigo_destino_2;
+                        var tiempo = document.createElement('td');
+                        tiempo.innerHTML = actual.tiempo;
+                        var costo = document.createElement('td');
+                        costo.innerHTML = actual.costo;
                         var acciones = document.createElement('td');
-                        acciones.innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;';                        
+                        acciones.innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;';
+                        // Crear ruta
+                        var mod_crear = document.createElement('a');                        
+                        mod_crear.setAttribute('onclick', 'mostrarRuta(this);');                        
+                        mod_crear.setAttribute('data-toggle','tooltip');
+                        mod_crear.setAttribute('data-placement', 'top');
+                        mod_crear.setAttribute('title', 'Crear');                        
+                        var i_etq0 = document.createElement('i');
+                        i_etq0.classList.add('mdi', 'mdi-new-box');
+                        // Modificar ruta
                         var mod_modificar = document.createElement('a');                        
                         mod_modificar.setAttribute('onclick', 'mostrarFila(this);');                        
                         mod_modificar.setAttribute('data-toggle','tooltip');
@@ -60,6 +71,7 @@
                         mod_modificar.setAttribute('title', 'Modificar');                        
                         var i_etq1 = document.createElement('i');
                         i_etq1.classList.add('mdi', 'mdi-check');
+                        // Eliminar ruta
                         var mod_eliminar = document.createElement('a');
                         mod_eliminar.setAttribute('onclick', 'mostrarFilaE(this)');
                         mod_eliminar.setAttribute('data-toggle','tooltip');
@@ -67,6 +79,14 @@
                         mod_eliminar.setAttribute('title', 'Borrar');
                         var i_etq2 = document.createElement('i');
                         i_etq2.classList.add('mdi', 'mdi-close');
+                        // Mostrar vuelos
+                        var mod_mostrar_vuelo = document.createElement('a');
+                        mod_mostrar_vuelo.setAttribute('onclick', 'mostrarVuelo(this)');
+                        mod_mostrar_vuelo.setAttribute('data-toggle','tooltip');
+                        mod_mostrar_vuelo.setAttribute('data-placement', 'top');
+                        mod_mostrar_vuelo.setAttribute('title', 'Mostrar caminos');
+                        var i_etq3 = document.createElement('i');
+                        i_etq3.classList.add('mdi', 'mdi-eye-outline');
                         /* Anidar elementos */
                         mod_modificar.appendChild(i_etq1);
                         acciones.appendChild(mod_modificar);                        
@@ -74,51 +94,100 @@
                         mod_eliminar.appendChild(i_etq2);
                         acciones.appendChild(mod_eliminar);
                         //acciones.appendChild(i_etq2);
+                        mod_mostrar_vuelo.appendChild(i_etq3);
+                        acciones.appendChild(mod_mostrar_vuelo);
+                        //acciones.appendChild(i_etq0);
+                        mod_crear.appendChild(i_etq0);
+                        acciones.appendChild(mod_crear);
+
                         fila.appendChild(numero);
-                        fila.appendChild(codigo);
-                        fila.appendChild(nombre);
-                        fila.appendChild(codigoCatedratico);
+                        fila.appendChild(codigo_destino_1);
+                        fila.appendChild(codigo_destino_2);
+                        fila.appendChild(tiempo);
+                        fila.appendChild(costo);
                         fila.appendChild(acciones);
                         tabla.appendChild(fila);
                     }
-                    toastr.success("Se han cargado los rutas.", "Muy bien")
+                    toastr.success("Se han cargado las rutas.", "Muy bien");
                 }
             });
         }
+
+        function mostrarRuta(fila){
+            var fila_act = fila.parentNode.parentNode.rowIndex;
+            // var codigo_destino_1 = document.getElementById('tabla-rutas').rows[fila_act].cells[1].innerHTML;
+            // var codigo_destino_2 = document.getElementById('tabla-rutas').rows[fila_act].cells[2].innerHTML;
+            // var tiempo = document.getElementById('tabla-rutas').rows[fila_act].cells[3].innerHTML;
+            // var costo = document.getElementById('tabla-rutas').rows[fila_act].cells[4].innerHTML;
+            // toastr.warning('codigo_destino_1: ' + codigo_destino_1 + ', codigo_destino_2: ' + codigo_destino_2+', tiempo: '+tiempo + ', costo: ' + costo, "Atención");
+            // document.getElementById('txt-codigo_destino_1-c').innerHTML = codigo_destino_1;
+            // document.getElementById('txt-codigo_destino_2-c').innerHTML = codigo_destino_2;          
+            // document.getElementById('txt-tiempo-c').innerHTML = tiempo;
+            // document.getElementById('txt-costo-c').innerHTML = costo;
+            $('#crear-ruta').on('show.bs.modal', function(){                
+                $('#txt-codigo_destino_1-c').val("");
+                $('#txt-codigo_destino_2-c').val("");
+                $('#txt-tiempo-c').val("");
+                $('#txt-costo-c').val("");
+                // $('#s-num-fila').attr('data-row', fila_act);
+            });
+            $('#crear-ruta').modal('show');                        
+        }
         function mostrarFila(fila){
             var fila_act = fila.parentNode.parentNode.rowIndex;
-            var codigo = document.getElementById('tabla-rutas').rows[fila_act].cells[1].innerHTML;
-            var nombre = document.getElementById('tabla-rutas').rows[fila_act].cells[2].innerHTML;
-            var codigoCatedratico = document.getElementById('tabla-rutas').rows[fila_act].cells[3].innerHTML;
-            toastr.warning('Codigo: ' + codigo + ', Nombre: ' + nombre+', Codigo catedratico: '+codigoCatedratico, "Atención");
-            document.getElementById('txt-codigo').innerHTML = codigo;
-            document.getElementById('txt-nombre').innerHTML = nombre;          
-            document.getElementById('txt-codigo-catedratico').innerHTML = codigoCatedratico;
-            $('#modificar-curso').on('show.bs.modal', function(){                
-                $('#txt-codigo').val(codigo);
-                $('#txt-nombre').val(nombre);
-                $('#txt-codigo-catedratico').val(codigoCatedratico);
+            var codigo_destino_1 = document.getElementById('tabla-rutas').rows[fila_act].cells[1].innerHTML;
+            var codigo_destino_2 = document.getElementById('tabla-rutas').rows[fila_act].cells[2].innerHTML;
+            var tiempo = document.getElementById('tabla-rutas').rows[fila_act].cells[3].innerHTML;
+            var costo = document.getElementById('tabla-rutas').rows[fila_act].cells[4].innerHTML;
+            toastr.warning('codigo_destino_1: ' + codigo_destino_1 + ', codigo_destino_2: ' + codigo_destino_2+', tiempo: '+tiempo + ', costo: ' + costo, "Atención");
+            document.getElementById('txt-codigo_destino_1').innerHTML = codigo_destino_1;
+            document.getElementById('txt-codigo_destino_2').innerHTML = codigo_destino_2;          
+            document.getElementById('txt-tiempo').innerHTML = tiempo;
+            document.getElementById('txt-costo').innerHTML = costo;
+            $('#modificar-ruta').on('show.bs.modal', function(){                
+                $('#txt-codigo_destino_1').val(codigo_destino_1);
+                $('#txt-codigo_destino_2').val(codigo_destino_2);
+                $('#txt-tiempo').val(tiempo);
+                $('#txt-costo').val(costo);
                 $('#s-num-fila').attr('data-row', fila_act);
             });
-            $('#modificar-curso').modal('show');                        
+            $('#modificar-ruta').modal('show');                        
         }
         function mostrarFilaE(fila){
             var fila_act = fila.parentNode.parentNode.rowIndex;
-            var codigo = document.getElementById('tabla-rutas').rows[fila_act].cells[1].innerHTML;
-            var nombre = document.getElementById('tabla-rutas').rows[fila_act].cells[2].innerHTML;
-            var codigoCatedratico = document.getElementById('tabla-rutas').rows[fila_act].cells[3].innerHTML;
-            toastr.warning('Codigo: ' + codigo + ', Nombre: ' + nombre+', Codigo catedratico: '+codigoCatedratico, "Atención");
-            document.getElementById('txt-codigo-e').innerHTML = codigo;
-            document.getElementById('txt-nombre-e').innerHTML = nombre;          
-            document.getElementById('txt-codigo-catedratico-e').innerHTML = codigoCatedratico;
-            $('#eliminar-curso').on('show.bs.modal', function(){                
-                $('#txt-codigo-e').val(codigo);
-                $('#txt-nombre-e').val(nombre);
-                $('#txt-codigo-catedratico-e').val(codigoCatedratico);
+            var codigo_destino_1 = document.getElementById('tabla-rutas').rows[fila_act].cells[1].innerHTML;
+            var codigo_destino_2 = document.getElementById('tabla-rutas').rows[fila_act].cells[2].innerHTML;
+            var tiempo = document.getElementById('tabla-rutas').rows[fila_act].cells[3].innerHTML;
+            var costo = document.getElementById('tabla-rutas').rows[fila_act].cells[4].innerHTML;
+            toastr.warning('codigo_destino_1: ' + codigo_destino_1 + ', codigo_destino_2: ' + codigo_destino_2+', tiempo: '+tiempo + ', costo: ' + costo, "Atención");
+            document.getElementById('txt-codigo_destino_1-e').innerHTML = codigo_destino_1;
+            document.getElementById('txt-codigo_destino_2-e').innerHTML = codigo_destino_2;          
+            document.getElementById('txt-tiempo-e').innerHTML = tiempo;
+            document.getElementById('txt-costo-e').innerHTML = costo;
+            $('#eliminar-ruta').on('show.bs.modal', function(){                
+                $('#txt-codigo_destino_1-e').val(codigo_destino_1);
+                $('#txt-codigo_destino_2-e').val(codigo_destino_2);
+                $('#txt-tiempo-e').val(tiempo);
+                $('#txt-costo-e').val(costo);
                 $('#s-num-fila').attr('data-row', fila_act);
             });
-            $('#eliminar-curso').modal('show');                                           
-        }    
+            $('#eliminar-ruta').modal('show');                                           
+        }
+
+
+        
+        function mostrarVuelo(fila){
+            var fila_act = fila.parentNode.parentNode.rowIndex;
+            var codigo_destino_1 = document.getElementById('tabla-rutas').rows[fila_act].cells[1].innerHTML;
+            var codigo_destino_2 = document.getElementById('tabla-rutas').rows[fila_act].cells[2].innerHTML;
+            var tiempo = document.getElementById('tabla-rutas').rows[fila_act].cells[3].innerHTML;
+            var costo = document.getElementById('tabla-rutas').rows[fila_act].cells[4].innerHTML;
+            toastr.warning('codigo_destino_1: ' + codigo_destino_1 + ', codigo_destino_2: ' + codigo_destino_2+', tiempo: '+tiempo + ', costo: ' + costo, "Ruta a mostrar vuelos.");
+            
+            toastr.info("Vuelos","Redirigiendo");
+            var queryString = "?destino1=" + codigo_destino_1 + "&destino2=" + codigo_destino_2 + "&tiempo=" + tiempo + "&costo=" + costo;
+            window.location.href = "http://127.0.0.1:8081/html/ltr/proyecto2/vuelos.html" + queryString;
+        }
     </script>    
 </head>
 
@@ -348,14 +417,15 @@
                                   <thead>
                                     <tr>
                                       <th scope="col"><b>#</b></th>
-                                      <th scope="col"><b>Código</b></th>
-                                      <th scope="col"><b>Nombre</b></th>
-                                      <th scope="col"><b>Código catedratico</b></th>                                    
+                                      <th scope="col"><b>Código destino 1</b></th>
+                                      <th scope="col"><b>Código destino 2</b></th>
+                                      <th scope="col"><b>Tiempo</b></th>
+                                      <th scope="col"><b>Costo</b></th>
                                       <th scope="col"><b>Acciones</b></th>
                                     </tr>
                                   </thead>
                                   <tbody id="lista">
-                                      <script>llenarTablaCursos();</script>
+                                      <script>llenarTablaRutas();</script>
                                   </tbody>
                             </table>
                         </div>                                                    
@@ -391,8 +461,47 @@
         <!-- End Page wrapper  -->
         <!-- ============================================================== -->
     </div>
-    <!-- Modal Modificar Catedrático -->
-    <div class="modal fade none-border" id="modificar-curso">
+    <!-- Modal crear ruta -->
+    <div class="modal fade none-border" id="crear-ruta">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><strong>Crear</strong> Información</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row">                                
+                            <div class="col-md-6">
+                                <label class="control-label">Código destino 1</label>
+                                <input class="form-control form-white" placeholder="Codigo destino 1" type="text" id="txt-codigo_destino_1-c" name="category-name" required />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="control-label">Código destino 2</label>                                    
+                                <input class="form-control form-white" placeholder="Codigo destino 2" type="text" id="txt-codigo_destino_2-c" name="category-name" required/>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="control-label">Tiempo</label>                                    
+                                <input class="form-control form-white" placeholder="Tiempo" type="text" id="txt-tiempo-c" name="category-name" required/>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="control-label">Costo</label>                                    
+                                <input class="form-control form-white" placeholder="Costo" type="text" id="txt-costo-c" name="category-name" required/>
+                            </div>
+                        </div>
+                        <span id="s-num-fila" data-row="0" style="display:none;"></span>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal" onclick="crearRuta(document.getElementById('txt-codigo_destino_1-c').innerHTML, document.getElementById('txt-codigo_destino_2-c').innerHTML, document.getElementById('txt-tiempo-c').innerHTML, document.getElementById('txt-costo-c').innerHTML)">Crear</button>
+                    <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END MODAL -->
+    <!-- Modal editar ruta -->
+    <div class="modal fade none-border" id="modificar-ruta">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -403,31 +512,35 @@
                     <form>
                         <div class="row">                                
                             <div class="col-md-6">
-                                <label class="control-label">Código</label>
-                                <input class="form-control form-white" type="text" id="txt-codigo" name="category-name" disabled />
+                                <label class="control-label">Código destino 1</label>
+                                <input class="form-control form-white" placeholder="Codigo destino 1" type="text" id="txt-codigo_destino_1" name="category-name" disabled />
                             </div>
                             <div class="col-md-6">
-                                <label class="control-label">Nombre</label>                                    
-                                <input class="form-control form-white" placeholder="Nombre" type="text" id="txt-nombre" name="category-name" required/>
+                                <label class="control-label">Código destino 2</label>                                    
+                                <input class="form-control form-white" placeholder="Codigo destino 2" type="text" id="txt-codigo_destino_2" name="category-name" disabled/>
                             </div>
                             <div class="col-md-6">
-                                    <label class="control-label">Codigo catedratico</label>                                    
-                                    <input class="form-control form-white" placeholder="Codigo catedratico" type="text" id="txt-codigo-catedratico" name="category-name" required/>
-                                </div>
+                                <label class="control-label">Tiempo</label>                                    
+                                <input class="form-control form-white" placeholder="Tiempo" type="text" id="txt-tiempo-c" name="category-name" required/>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="control-label">Costo</label>                                    
+                                <input class="form-control form-white" placeholder="Costo" type="text" id="txt-costo-c" name="category-name" required/>
+                            </div>
                         </div>
                         <span id="s-num-fila" data-row="0" style="display:none;"></span>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal" onclick="modificarCurso(document.getElementById('txt-codigo').innerHTML, document.getElementById('txt-nombre').innerHTML, document.getElementById('txt-codigo-catedratico').innerHTML)">Guardar</button>
+                    <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal" onclick="modificarRuta(document.getElementById('txt-codigo_destino_1').innerHTML, document.getElementById('txt-codigo_destino_2').innerHTML, document.getElementById('txt-tiempo').innerHTML, document.getElementById('txt-costo').innerHTML)">Guardar</button>
                     <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
     </div>
     <!-- END MODAL -->
-    <!-- Modal Modificar Catedrático -->
-    <div class="modal fade none-border" id="eliminar-curso">
+    <!-- Modal eliminar ruta -->
+    <div class="modal fade none-border" id="eliminar-ruta">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -436,25 +549,29 @@
                     </div>
                     <div class="modal-body">
                         <form>
-                            <div class="row">                                
+                            <div class="row">
                                 <div class="col-md-6">
-                                    <label class="control-label">Código</label>
-                                    <input class="form-control form-white" type="text" id="txt-codigo-e" name="category-name" disabled />
+                                    <label class="control-label">Código destino 1</label>
+                                    <input class="form-control form-white" placeholder="Codigo destino 1" type="text" id="txt-codigo_destino_1-e" name="category-name" disabled />
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="control-label">Nombre</label>                                    
-                                    <input class="form-control form-white" placeholder="Nombre" type="text" id="txt-nombre-e" name="category-name" required/>
+                                    <label class="control-label">Código destino 2</label>                                    
+                                    <input class="form-control form-white" placeholder="Codigo destino 2" type="text" id="txt-codigo_destino_2-e" name="category-name" disabled/>
                                 </div>
                                 <div class="col-md-6">
-                                        <label class="control-label">Codigo catedratico</label>                                    
-                                        <input class="form-control form-white" placeholder="Codigo catedratico" type="text" id="txt-codigo-catedratico-e" name="category-name" required/>
+                                    <label class="control-label">Tiempo</label>                                    
+                                    <input class="form-control form-white" placeholder="Tiempo" type="text" id="txt-tiempo-e" name="category-name" disabled/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="control-label">Costo</label>                                    
+                                    <input class="form-control form-white" placeholder="Costo" type="text" id="txt-costo-e" name="category-name" disabled/>
                                 </div>
                             </div>
                             <span id="s-num-fila" data-row="0" style="display:none;"></span>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal" onclick="eliminarCurso(document.getElementById('txt-codigo-e').innerHTML, document.getElementById('txt-nombre-e').innerHTML, document.getElementById('txt-codigo-catedratico-e').innerHTML)">Eliminar</button>
+                        <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal" onclick="eliminarRuta(document.getElementById('txt-codigo_destino_1-e').innerHTML, document.getElementById('txt-codigo_destino_2-e').innerHTML, document.getElementById('txt-tiempo-e').innerHTML, document.getElementById('txt-costo-e').innerHTML)">Eliminar</button>
                         <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Cancelar</button>
                     </div>
                 </div>
@@ -496,13 +613,23 @@
          ****************************************/
         $('#zero_config').DataTable();
     </script>
-    <script> 
+    <script>
+        function mostarModalCrear(fila){
+            var fila_act = fila;
+            toastr.warning(typeof(fila_act.type), "Atención");
+            var fila = obtenerFila(fila);
+            $('#mod_crear').on('show.bs.modal', function(event){
+                $(this).find("#txt-codigo_destino_1-c").text(fila);
+            });
+            toastr.warning(fila.id, "Atención");
+        }
+
         function mostrarModalModificar(fila){            
             var fila_act = fila;
             toastr.warning(typeof(fila_act.type), "Atención");
             var fila = obtenerFila(fila);
             $('#mod_modificar').on('show.bs.modal', function(event){
-                $(this).find("#txt-codigo").text(fila);
+                $(this).find("#txt-codigo_destino_1").text(fila);
             });
             toastr.warning(fila.id, "Atención");
         }
@@ -512,7 +639,7 @@
             toastr.warning(typeof(fila_act.type), "Atención");
             var fila = obtenerFila(fila);
             $('#mod_eliminar').on('show.bs.modal', function(event){
-                $(this).find("#txt-codigo-e").text(fila);
+                $(this).find("#txt-codigo_destino_1-e").text(fila);
             });
             toastr.warning(fila.id, "Atención");
         }
@@ -521,34 +648,75 @@
             return $(fila).closest("tr");
         }
     </script>
+     <script>
+        function crearRuta(){
+            var codigo_destino_1 = $('#crear-ruta #txt-codigo_destino_1-c').val().trim();
+            var codigo_destino_2 = $('#crear-ruta #txt-codigo_destino_2-c').val().trim();
+            var tiempo = $('#crear-ruta #txt-tiempo-c').val().trim();
+            var costo = $('#crear-ruta #txt-costo-c').val().trim();
+            if(codigo_destino_1 == "" || codigo_destino_2 == "" || tiempo == "" || costo == ""){
+                toastr.error('Campos vacios', "Error");
+                return;
+            }
+            var obj_mod = {};
+            // var obj_r = {};
+            obj_mod.codigo_destino_1 = codigo_destino_1;
+            obj_mod.codigo_destino_2 = codigo_destino_2;
+            obj_mod.tiempo = tiempo;
+            obj_mod.costo = costo;
+            
+            // alert(JSON.stringify(obj_r));
+            obj_route_json = JSON.stringify(obj_mod);
+            console.log(obj_route_json);
+            httpPost(new_route, obj_route_json, function(response){
+                var respuesta = JSON.parse(response);
+                if(respuesta.result == "Ruta insertada correctamente."){
+                    var n_fila = $('#crear-ruta #s-num-fila').attr('data-row');
+                    var fila = document.getElementById('tabla-rutas').rows[n_fila].cells;
+                    fila[1].innerHTML = codigo_destino_1;
+                    fila[2].innerHTML = codigo_destino_2;
+                    fila[3].innerHTML = tiempo;
+                    fila[4].innerHTML = costo;
+                    document.getElementById('tabla-rutas').rows[fila];
+                    // alert('Registro modificado exitosamente.');
+                    toastr.success("Ruta creada correctamente","Exito");
+                }else{
+                    toastr.warning("No se pudo crear la ruta","Atencion");
+                    // alert('No se pudieron realizar los cambios.');
+                }
+            });
+        }
+    </script>
     <script>
-        function modificarCurso(){
-            var codigo = $('#modificar-curso #txt-codigo').val().trim();
-            var nombre = $('#modificar-curso #txt-nombre').val().trim();
-            var codigoCatedratico = $('#modificar-curso #txt-codigo-catedratico').val().trim();
-            if(codigo == "" || nombre == "" || codigoCatedratico == ""){
+        function modificarRuta(){
+            var codigo_destino_1 = $('#modificar-ruta #txt-codigo_destino_1').val().trim();
+            var codigo_destino_2 = $('#modificar-ruta #txt-codigo_destino_2').val().trim();
+            var tiempo = $('#modificar-ruta #txt-tiempo').val().trim();
+            var costo = $('#modificar-ruta #txt-costo').val().trim();
+            if(codigo_destino_1 == "" || codigo_destino_2 == "" || tiempo == "" || costo == ""){
                 toastr.error('Error #1', "Error");
                 return;
             }
             var obj_mod = {};
-            var obj_cur = {};
-            obj_mod.codigo = codigo;
-            obj_mod.nombre = nombre;
-            obj_mod.codigoCatedratico = codigoCatedratico;
-            obj_cur.codigo = codigo;
-            obj_cur.curso = obj_mod;
-            // alert(JSON.stringify(obj_cur));
-            obj_cur_json = JSON.stringify(obj_cur);
-            httpPost(edit_curso, obj_cur_json, function(response){
+            // var obj_r = {};
+            obj_mod.codigo_destino_1 = codigo_destino_1;
+            obj_mod.codigo_destino_2 = codigo_destino_2;
+            obj_mod.tiempo = tiempo;
+            obj_mod.costo = costo;
+           
+            // alert(JSON.stringify(obj_r));
+            obj_route_json = JSON.stringify(obj_mod);
+            httpPost(edit_route, obj_route_json, function(response){
                 var respuesta = JSON.parse(response);
-                if(respuesta.result == "Ruta actualizado."){
-                    var n_fila = $('#modificar-curso #s-num-fila').attr('data-row');
+                if(respuesta.result == "Ruta editada correctamente."){
+                    var n_fila = $('#modificar-ruta #s-num-fila').attr('data-row');
                     var fila = document.getElementById('tabla-rutas').rows[n_fila].cells;
-                    fila[2].innerHTML = nombre;
-                    fila[3].innerHTML = codigoCatedratico;
+                    // fila[2].innerHTML = codigo_destino_2;
+                    fila[3].innerHTML = tiempo;
+                    fila[4].innerHTML = costo;
                     document.getElementById('tabla-rutas').rows[fila];
                     // alert('Registro modificado exitosamente.');
-                    toastr.success("Ruta editado correctamente","Exito");
+                    toastr.success("Ruta editada correctamente","Exito");
                 }else{
                     toastr.warning("No se pudieron realizar los cambios","Atencion");
                     // alert('No se pudieron realizar los cambios.');
@@ -557,29 +725,34 @@
         }
     </script>
     <script>
-            function eliminarCurso(){
-                var codigo = $('#eliminar-curso #txt-codigo-e').val().trim();
-                var nombre = $('#eliminar-curso #txt-nombre-e').val().trim();
-                var codigoCatedratico = $('#eliminar-curso #txt-codigo-catedratico-e').val().trim();
-                if(codigo == "" || nombre == "" || codigoCatedratico == ""){
-                    toastr.error('Error #1', "Error");           
-                    return;
-                }
-                var obj_mod = {};
-                obj_mod.codigo = codigo;
-                // alert(JSON.stringify(obj_cur));
-                obj_cur_json = JSON.stringify(obj_mod);
-                httpPost(delete_curso, obj_cur_json, function(response){
-                    var respuesta = JSON.parse(response);
-                    if(respuesta.result == "Ruta eliminado."){
-                        toastr.success("Ruta eliminado correctamente","Exito");
-                    }else{
-                        toastr.warning("No se pudieron realizar los cambios","Atencion");
-                        // alert('No se pudieron realizar los cambios.');
-                    }
-                });
+        function eliminarRuta(){
+            var codigo_destino_1 = $('#eliminar-ruta #txt-codigo_destino_1-e').val().trim();
+            var codigo_destino_2 = $('#eliminar-ruta #txt-codigo_destino_2-e').val().trim();
+            var tiempo = $('#eliminar-ruta #txt-tiempo-e').val().trim();
+            var costo = $('#eliminar-ruta #txt-costo-e').val().trim();
+            if(codigo_destino_1 == "" || codigo_destino_2 == "" || tiempo == "" || costo == ""){
+                toastr.error('Campos vacios', "Error");           
+                return;
             }
-        </script>
+            var obj_mod = {};
+            obj_mod.codigo_destino_1 = codigo_destino_1;
+            obj_mod.codigo_destino_2 = codigo_destino_2;
+            obj_mod.tiempo = tiempo;
+            obj_mod.costo = costo;
+            
+            // alert(JSON.stringify(obj_r));
+            obj_route_json = JSON.stringify(obj_mod);
+            httpPost(delete_route, obj_route_json, function(response){
+                var respuesta = JSON.parse(response);
+                if(respuesta.result == "Ruta eliminada correctamente."){
+                    toastr.success("Ruta eliminada correctamente","Exito");
+                }else{
+                    toastr.warning("No se pudieron realizar los cambios","Atencion");
+                    // alert('No se pudieron realizar los cambios.');
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>
